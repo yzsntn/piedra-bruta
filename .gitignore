@@ -21,3 +21,6 @@ Temporary Items
 
 # Respaldos de la bitácora descargados durante pruebas
 piedra-bruta-respaldo-*.json
+
+# Configuración local de Claude Code (vista previa)
+.claude/
