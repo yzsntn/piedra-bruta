@@ -83,8 +83,9 @@ a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.2em}
 .fila{display:grid;grid-template-columns:60px minmax(0,1fr);gap:var(--g);padding:var(--g) var(--g) 0;position:relative;z-index:var(--z-menu)}
 .t-logo{display:grid;place-items:center;height:60px;background:var(--tinta);color:var(--tinta-ink);font-family:var(--f-display);font-size:30px;text-decoration:none;line-height:1}
 .t-nav{background:var(--surface);min-height:60px;display:flex;align-items:center;padding:0 16px}
-.menu{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-left:calc(50vw - 60px - 3 * var(--g) - 16px)}
-.enlaces{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.menu{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px}
+@media (min-width:1280px){.menu{padding-left:calc(50vw - 60px - 3 * var(--g) - 16px)}}
+.enlaces{display:flex;gap:28px;list-style:none;margin:0;padding:0;white-space:nowrap}
 .enlaces a,.tg{font-family:var(--f-text);font-size:var(--step-small);font-weight:500;color:var(--ink);text-decoration:none;padding:10px 0;min-height:44px;display:inline-flex;align-items:center}
 .enlaces a:hover{text-decoration:underline}
 .toggles{display:flex;gap:6px}
@@ -102,7 +103,7 @@ h1{font-family:var(--f-display);font-weight:500;font-size:var(--step-display);li
 .lines .line{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
 .lines [data-line]{display:block}
 .t-nombre .sub{font-size:var(--step-lead);line-height:1.3;max-width:24ch}
-.t-piedra{background:var(--noche);color:var(--noche-ink);display:grid;place-items:center;min-width:0;min-height:0;overflow:hidden;position:relative}
+.t-piedra{background:var(--noche);color:var(--noche-ink);min-width:0;min-height:0;overflow:hidden;position:relative}
 .t-foto{margin:0;min-height:0;overflow:hidden;background:var(--surface)}
 .t-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 38%;filter:grayscale(1) contrast(1.06)}
 .t-bajo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--g);min-height:0}
@@ -113,11 +114,12 @@ h1{font-family:var(--f-display);font-weight:500;font-size:var(--step-display);li
 .cuenta .num-total{font-family:var(--f-display);font-size:var(--step-head);line-height:.9;display:block;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 
 /* Escenario de la piedra */
-.stone-frame{position:relative;width:100%;height:100%;display:grid;place-items:center;padding:clamp(8px,2vw,28px);isolation:isolate}
+/* La piedra cabe entera en su azulejo: el SVG se ajusta al alto y al ancho disponibles sin recortarse */
+.stone-frame{position:absolute;inset:0;display:block;padding:clamp(12px,2.2vw,32px);isolation:isolate}
 .trazado{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:calc(.08 + var(--avance,0) * .45);transition:opacity 1.2s ease;pointer-events:none}
 .trazado *{fill:none;stroke:#8EA6FF;stroke-width:1;vector-effect:non-scaling-stroke}
 .trazado .pt{fill:#8EA6FF;stroke:none}
-#stone{position:relative;z-index:1;width:100%;height:100%;max-height:100%;display:block;overflow:visible}
+#stone{position:relative;z-index:1;width:100%;height:100%;display:block;overflow:visible}
 .frag{cursor:pointer;outline:none;transform-box:fill-box;transform-origin:center;transition:transform .8s cubic-bezier(.5,0,.75,0),opacity .8s ease}
 .frag .seam{fill:none;stroke:var(--stone-seam);stroke-width:2.2;stroke-linejoin:round;transition:stroke .3s ease}
 .frag .sombra{fill:#05070A;fill-opacity:.38;transition:fill-opacity .35s ease}
@@ -251,20 +253,23 @@ label.k{display:block}
 .fnav{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
 
 /* ---------- Pie: tinta invertida, la marca a todo lo ancho */
-.pie{margin-top:clamp(120px,14vw,220px);background:var(--tinta);color:var(--tinta-ink);min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;gap:72px;padding:40px var(--m) 20px}
+.pie{margin-top:var(--g);background:var(--tinta);color:var(--tinta-ink);min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;gap:72px;padding:40px var(--m) 20px}
 :root[data-theme="dark"] .pie{background:#000000}
 .pie-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
 .pie-cols p{font-size:var(--step-small);line-height:1.55;color:var(--tinta-muted)}
 .pie-cols p.k{color:var(--tinta-ink);font-weight:500;margin-bottom:4px}
 .pie-cols a{color:var(--tinta-ink)}
 .pie .res-mark{color:var(--tinta-ink)}
-.autoria{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:20px;align-content:center}
-.autoria>*{grid-column:6/12}
-.autoria h2{font-family:var(--f-display);font-size:var(--step-lead);line-height:1.2;margin-bottom:18px}
-.autoria p{max-width:60ch;margin-bottom:14px;color:var(--tinta-ink)}
-.autoria .firma{font-style:italic;margin-top:8px}
-.autoria .firma b{font-style:normal;font-weight:500}
-.autoria .firma span{color:var(--tinta-muted)}
+/* Carta del autor: el tablero vuelve antes del pie */
+.carta{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--g);padding:0 var(--g);margin-top:clamp(120px,14vw,220px)}
+.c-titulo{background:var(--accent);color:var(--accent-ink);padding:clamp(24px,3vw,44px);display:flex;flex-direction:column;justify-content:space-between;gap:48px;min-height:min(78svh,720px)}
+:root[data-theme="dark"] .c-titulo{background:#1E3FAE;color:#FFFFFF}
+.c-titulo h2{font-family:var(--f-display);font-size:var(--step-head);line-height:.98;letter-spacing:-.025em}
+.c-titulo .firma{font-size:var(--step-body);line-height:1.5}
+.c-titulo .firma b{font-weight:500}
+.c-texto{background:var(--surface);padding:clamp(24px,4vw,64px);display:flex;flex-direction:column;justify-content:flex-end;gap:18px}
+.c-texto p{max-width:56ch}
+.c-texto .c-lead{font-family:var(--f-display);font-size:clamp(1.5rem,2.4vw,2.25rem);line-height:1.18;letter-spacing:-.01em;max-width:38ch;margin-bottom:12px}
 .marca{display:block;width:100%;height:auto;fill:currentColor;overflow:visible}
 .legal{font-size:var(--step-small);color:var(--tinta-muted);margin-top:14px}
 
@@ -287,7 +292,6 @@ label.k{display:block}
 
 /* ---------- Tableta */
 @media (max-width:980px){
-  .menu{padding-left:0}
   .cuatro{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}
   .tablero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);height:auto;max-height:none;min-height:0;grid-template-rows:auto}
   .t-nombre{grid-column:1/-1;min-height:34svh}
@@ -295,7 +299,8 @@ label.k{display:block}
   .t-foto{aspect-ratio:4/5}
   .t-bajo{grid-template-columns:minmax(0,1fr);}
   .pie-cols{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
-  .autoria>*{grid-column:3/13}
+  .carta{grid-template-columns:minmax(0,1fr)}
+  .c-titulo{min-height:0}
 }
 /* ---------- Teléfono: una columna de azulejos */
 @media (max-width:640px){
@@ -312,7 +317,8 @@ label.k{display:block}
   .t-nombre{min-height:30svh;padding:20px}
   h1{font-size:23vw}
   .t-piedra{aspect-ratio:auto}
-  .stone-frame{padding:14px 4px}
+  .stone-frame{position:relative;inset:auto;padding:14px 4px}
+  #stone{height:auto}
   .t-foto{aspect-ratio:4/3;order:5}
   .t-bajo{order:4}
   .t-lema,.t-avance{padding:20px}
@@ -330,7 +336,6 @@ label.k{display:block}
   .bit-foto{grid-column:1;order:2;position:static;width:60%;justify-self:end}
   .tema-btn{padding:12px 8px}
   .pie-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .autoria>*{grid-column:1/-1}
   .frag .num{font-size:32px;stroke-width:5px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -494,6 +499,17 @@ label.k{display:block}
       </div>
     </div>
   </section>
+  <section class="carta" aria-labelledby="h-carta">
+    <div class="c-titulo">
+      <h2 id="h-carta" data-rev>Del autor<br>a sus Hermanos</h2>
+      <p class="firma" data-rev style="--d:1">Con un T∴ A∴ F∴,<br><b>Jesús Antonio Díaz Franco</b>, M∴ M∴<br>Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8</p>
+    </div>
+    <div class="c-texto">
+      <p class="c-lead" data-rev>Queridos Hermanos: preparé este material con afecto fraternal, como una ofrenda al Taller y a quienes hoy comienzan a labrar su piedra.</p>
+      <p data-rev style="--d:1">No busco créditos ni reconocimiento. Mi único deseo es que la instrucción que recibimos en Logia pueda acompañarlos también fuera del Templo, al alcance de la mano, cuando más la necesiten.</p>
+      <p data-rev style="--d:2">Lo que aquí encontrarán pertenece a la tradición de nuestra Orden y a los autores citados; mía es solo la voluntad de compartirlo.</p>
+    </div>
+  </section>
 </main>
 
 <footer class="pie">
@@ -502,12 +518,6 @@ label.k{display:block}
     <div><p class="k">Temas reservados</p><p>Los temas marcados como <span class="res-mark" style="margin:0">reservado</span> se presentan aquí solo en su sentido moral. Su contenido ritual se instruye de viva voz, dentro del Templo.</p></div>
     <div><p class="k">Tu avance</p><p>Se guarda únicamente en este dispositivo y no se envía a ningún servidor. Usa “Descargar respaldo” para conservarlo o llevarlo a otro dispositivo.</p></div>
     <div><p class="k">Imágenes</p><p class="credits">Ferrotipos de canteros, The Metropolitan Museum of Art (<a href="https://commons.wikimedia.org/w/index.php?curid=60501365">1</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=60500201">2</a>), <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.es">CC0</a>. <a href="https://commons.wikimedia.org/w/index.php?curid=64170779">Templo de Apolo en Delfos</a>, Skyring, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a>. <a href="https://commons.wikimedia.org/w/index.php?curid=21816676">Catedral de Chihuahua</a>, Battroid, <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.es">CC BY-SA 3.0</a>. Vía Wikimedia Commons; recortadas y reducidas.</p></div>
-  </div>
-  <div class="autoria">
-    <h2>Del autor a sus Hermanos</h2>
-    <p>Queridos Hermanos: preparé este material con afecto fraternal, como una ofrenda al Taller y a quienes hoy comienzan a labrar su piedra. No busco créditos ni reconocimiento. Mi único deseo es que la instrucción que recibimos en Logia pueda acompañarlos también fuera del Templo, al alcance de la mano, cuando más la necesiten.</p>
-    <p>Lo que aquí encontrarán pertenece a la tradición de nuestra Orden y a los autores citados; mía es solo la voluntad de compartirlo.</p>
-    <p class="firma">Con un T∴ A∴ F∴,<br><b>Jesús Antonio Díaz Franco</b>, M∴ M∴<br><span>Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8</span></p>
   </div>
   <div>
     <svg class="marca" viewBox="0 0 1000 150" aria-hidden="true"><text x="0" y="120" textLength="1000" lengthAdjust="spacingAndGlyphs" font-family="'Bodoni Moda',Didot,Georgia,serif" font-size="158" font-weight="500">Piedra bruta</text></svg>
@@ -679,7 +689,8 @@ const escena=document.getElementById("escena");
 const cv=document.getElementById("polvo"),cx2=cv.getContext("2d");let parts=[],anim=0;
 function polvo(n){if(REDUCIDO)return;const f=FR.get(n);const r=escena.getBoundingClientRect(),sr=svg.getBoundingClientRect();
   const dpr=Math.min(2,window.devicePixelRatio||1);cv.width=r.width*dpr;cv.height=r.height*dpr;cx2.setTransform(dpr,0,0,dpr,0,0);
-  const x=sr.left-r.left+f.cx/1000*sr.width,y=sr.top-r.top+f.cy/560*sr.height;
+  const k=Math.min(sr.width/1000,sr.height/560),ox=(sr.width-1000*k)/2,oy=(sr.height-560*k)/2;
+  const x=sr.left-r.left+ox+f.cx*k,y=sr.top-r.top+oy+f.cy*k;
   for(let i=0;i<46;i++)parts.push({x:x+(Math.random()-.5)*30,y:y+(Math.random()-.5)*20,vx:(Math.random()-.5)*1.6,vy:-Math.random()*1.4,r:Math.random()*1.8+.4,a:1,c:Math.random()<.25?"226,194,126":"200,192,176"});
   if(!anim)anim=requestAnimationFrame(paso)}
 function paso(){cx2.clearRect(0,0,cv.width,cv.height);parts.forEach(p=>{p.vy+=.045;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.a-=.011;cx2.fillStyle=`rgba(${p.c},${Math.max(0,p.a)})`;cx2.beginPath();cx2.arc(p.x,p.y,p.r,0,6.283);cx2.fill()});
