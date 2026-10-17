@@ -243,6 +243,7 @@ footer{display:grid;gap:8px;font-size:15.5px;color:var(--muted)}
     <div class="toggles">
       <button class="chipbtn" id="t-luz" type="button" aria-pressed="false">Templo iluminado</button>
       <button class="chipbtn" id="t-son" type="button" aria-pressed="false">Sonido</button>
+      <button class="chipbtn" id="t-inst" type="button" hidden>Instalar</button>
     </div>
   </div>
   <header>
@@ -659,12 +660,33 @@ if("serviceWorker" in navigator&&location.protocol!=="file:"){window.addEventLis
 const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
 let dismissed=false;try{const v=+localStorage.getItem("pb-install-no")||0;dismissed=Date.now()-v<14*864e5}catch(e){}
 let deferred=null;
-window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;if(!standalone&&!dismissed){$("install").hidden=false;$("install-btn").hidden=false}});
-const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
-if(ios&&!standalone&&!dismissed){$("install").hidden=false;$("install-txt").textContent="En Safari toca Compartir y luego “Agregar a inicio”. Quedará como app y funcionará sin internet."}
+const UA=navigator.userAgent;
+const ios=/iphone|ipad|ipod/i.test(UA)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const android=/android/i.test(UA);
+const samsung=/SamsungBrowser/i.test(UA);
+const enApp=/FBAN|FBAV|Instagram|WhatsApp|Line\//i.test(UA);
+function pasos(){
+  if(enApp)return "Estás dentro de otra app. Abre este enlace en tu navegador (menú ⋮ → “Abrir en el navegador”) y desde ahí instálala.";
+  if(ios)return "En Safari toca el botón Compartir y luego “Agregar a inicio”. Quedará como app y funcionará sin internet.";
+  if(samsung)return "En Samsung Internet toca el menú ☰ (abajo a la derecha), luego “Agregar página a” y elige “Pantalla de inicio”. Si ves un ícono de descarga en la barra de direcciones, también puedes tocarlo.";
+  if(android)return "En Chrome toca el menú ⋮ (arriba a la derecha) y elige “Instalar app” o “Agregar a la pantalla principal”, luego “Instalar”.";
+  return "En Chrome o Edge para computadora, usa el ícono de instalar en la barra de direcciones o el menú ⋮ → “Instalar”.";
+}
+function mostrarInstalar(forzar){
+  if(standalone)return;
+  $("install").hidden=false;
+  if(deferred){$("install-btn").hidden=false;$("install-txt").textContent="Queda como app en tu pantalla de inicio y funciona sin internet."}
+  else{$("install-btn").hidden=true;$("install-txt").textContent=pasos()}
+  if(forzar)$("install").scrollIntoView({behavior:REDUCIDO?"auto":"smooth",block:"center"});
+}
+if(!standalone)$("t-inst").hidden=false;
+$("t-inst").addEventListener("click",async()=>{if(deferred){deferred.prompt();try{await deferred.userChoice}catch(e){}deferred=null;return}mostrarInstalar(true)});
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;if(!dismissed)mostrarInstalar(false)});
+// Si el navegador no ofrece el aviso por su cuenta, mostramos los pasos del menú.
+if(!standalone&&!dismissed&&(ios||android))setTimeout(()=>{if($("install").hidden)mostrarInstalar(false)},2500);
 $("install-btn").addEventListener("click",async()=>{if(!deferred)return;deferred.prompt();try{await deferred.userChoice}catch(e){}deferred=null;$("install").hidden=true});
 $("install-no").addEventListener("click",()=>{$("install").hidden=true;try{localStorage.setItem("pb-install-no",String(Date.now()))}catch(e){}});
-window.addEventListener("appinstalled",()=>{$("install").hidden=true});
+window.addEventListener("appinstalled",()=>{$("install").hidden=true;$("t-inst").hidden=true});
 
 $("aviso-btn").addEventListener("click",()=>$("export").click());
 $("aviso-no").addEventListener("click",()=>{const r=leerR();r.posp=S.done.length+Object.keys(S.notes).length+3;escribirR(r);$("aviso").hidden=true});
