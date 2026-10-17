@@ -12,10 +12,29 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Piedra Bruta">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Alegreya:ital,wght@0,400;0,500;1,400&family=Alegreya+Sans:wght@500;700&display=swap">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://yzsntn.github.io/piedra-bruta/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8">
+<meta property="og:title" content="La Piedra Bruta del Aprendiz">
+<meta property="og:description" content="Los 33 temas del Primer Grado, trabajados como una piedra bruta que se desbasta tema por tema.">
+<meta property="og:url" content="https://yzsntn.github.io/piedra-bruta/">
+<meta property="og:image" content="https://yzsntn.github.io/piedra-bruta/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Piedra bruta de 33 fragmentos con el título La Piedra Bruta del Aprendiz">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/cinzel-700.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/alegreya-400.woff" as="font" type="font/woff" crossorigin>
 <style>
+@font-face{font-family:"Cinzel";src:url("fonts/cinzel-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Cinzel";src:url("fonts/cinzel-700.woff") format("woff");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Alegreya";src:url("fonts/alegreya-400.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Alegreya";src:url("fonts/alegreya-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Alegreya";src:url("fonts/alegreya-400-italic.woff") format("woff");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Alegreya Sans";src:url("fonts/alegreya-sans-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Alegreya Sans";src:url("fonts/alegreya-sans-700.woff") format("woff");font-weight:700;font-style:normal;font-display:swap}
 /* Layout: una sola columna de lectura; la piedra como pieza central a lo ancho, la bitácora en tres columnas (una por herramienta) que se apilan en móvil. */
 :root{
   --bg:#E8EBE9; --surface:#F5F6F4; --ink:#1C2227; --muted:#59646C; --line:#C7CEcB;
@@ -105,6 +124,29 @@ p{margin:0}
 .install{display:grid;gap:12px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);border-radius:6px;padding:14px 16px}
 .autoria{display:grid;gap:6px;padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--line);color:var(--ink);max-width:70ch}
 .autoria .k{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.libro{font-family:var(--f-label);font-size:15px;color:var(--muted)}
+.libro b{color:var(--ink)}
+.fnav{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px solid var(--line);padding-top:14px}
+.fnav .btn{padding:10px 12px;min-width:44px}
+#impresion{display:none}
+@media print{
+  @page{margin:16mm 14mm}
+  body{background:#fff;color:#111;padding:0;font-size:11.5pt}
+  body>*:not(#impresion){display:none!important}
+  #impresion{display:block}
+  #impresion h1{font-family:var(--f-display);font-size:22pt;margin:4pt 0 8pt}
+  #impresion h2{font-family:var(--f-display);font-size:14pt;margin:16pt 0 6pt;border-bottom:1px solid #999;padding-bottom:3pt;break-after:avoid}
+  #impresion .eyebrow{color:#444}
+  .pr-head p{margin:2pt 0}
+  .pr-line{display:inline-block;min-width:240px;border-bottom:1px solid #333}
+  .pr-tema{break-inside:avoid;padding:6pt 0;border-bottom:1px solid #ddd}
+  .pr-tema h3{font-family:var(--f-label);font-size:11.5pt;margin:0 0 2pt}
+  .pr-tema h3 span{font-weight:500;color:#555}
+  .pr-preg{font-style:italic;color:#333;margin:0 0 3pt}
+  .pr-nota{margin:0;white-space:normal}
+  .pr-vacia{margin:0;color:#888}
+  .pr-firma{margin-top:28pt}
+}
 .note{font-family:var(--f-label);font-size:14px;color:var(--muted)}
 
 /* Ficha */
@@ -152,6 +194,11 @@ footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:6px;fo
     <div class="actions"><button class="btn primary" id="install-btn" type="button" hidden>Instalar app</button><button class="btn quiet" id="install-no" type="button">Ahora no</button></div>
   </div>
 
+  <div class="install" id="aviso" hidden role="status">
+    <p><b>Respalda tu bitácora.</b> <span id="aviso-txt"></span></p>
+    <div class="actions"><button class="btn primary" id="aviso-btn" type="button">Descargar respaldo</button><button class="btn quiet" id="aviso-no" type="button">Más tarde</button></div>
+  </div>
+
   <section class="stone-card" aria-labelledby="h-piedra">
     <h2 id="h-piedra" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">La piedra</h2>
     <div class="stone-frame">
@@ -180,6 +227,7 @@ footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:6px;fo
       <div class="actions">
         <button class="btn" id="export" type="button">Descargar respaldo</button>
         <button class="btn" id="import" type="button">Cargar respaldo</button>
+        <button class="btn" id="print" type="button">Imprimir bitácora</button>
         <button class="btn" id="copy" type="button">Copiar mi bitácora</button>
         <button class="btn quiet" id="reset" type="button">Reiniciar la piedra</button>
         <input type="file" id="import-file" accept=".json,application/json" hidden>
@@ -212,6 +260,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:6px;fo
   </footer>
 </div>
 
+<section id="impresion" aria-hidden="true"></section>
+
 <dialog id="ficha" aria-labelledby="f-title">
   <div class="ficha">
     <div class="top">
@@ -221,60 +271,25 @@ footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:6px;fo
     <h2 id="f-title"></h2>
     <div><div class="k">Idea central</div><p id="f-idea"></p></div>
     <p class="reserva" id="f-res" hidden>Tema reservado. Aquí solo se presenta su sentido moral; su forma y contenido ritual se aprenden en Logia.</p>
+    <p class="libro" id="f-libro"></p>
     <div><div class="k">Para meditar</div><p class="pregunta" id="f-preg"></p></div>
     <div><label class="k" for="f-nota">Lo que hoy quité de mí</label><textarea id="f-nota" placeholder="Escribe con tus propias palabras…"></textarea></div>
     <div class="actions">
       <button class="btn primary" id="f-toggle" type="button"></button>
       <span class="note" id="f-hint"></span>
     </div>
+    <nav class="fnav" aria-label="Recorrer los temas">
+      <button class="btn quiet" id="f-prev" type="button"></button>
+      <span class="note" id="f-pos"></span>
+      <button class="btn quiet" id="f-next" type="button"></button>
+    </nav>
   </div>
 </dialog>
 
+<script src="temas.js"></script>
 <script>
 (function(){
-const HERR={
-  mazo:{nombre:"El mazo",sub:"La voluntad que inicia el trabajo"},
-  regla:{nombre:"La regla de 24 pulgadas",sub:"Medida y orden"},
-  cincel:{nombre:"El cincel",sub:"El discernimiento que afina"}
-};
-const T=[
-// ---- EL MAZO
-{n:1,g:"mazo",t:"La Cámara de Preparación",i:"Antes de recibir la Luz, el aspirante queda a solas consigo mismo en un recinto de reflexión. Sus emblemas recuerdan la brevedad de la vida y la necesidad de morir a los vicios para renacer a una vida nueva. Es la primera mirada honesta hacia el interior.",p:"¿Qué parte de mi vida anterior debía quedarse en aquella cámara?"},
-{n:2,g:"mazo",t:"El Triangular",i:"La plancha triangular pregunta al aspirante por sus deberes para con el Ser Supremo, para con sus semejantes y para consigo mismo. El triángulo equilátero, primera figura geométrica cerrada, expresa el equilibrio entre esos tres deberes. Sus respuestas vuelven a estudiarse en los temas 21, 22 y 23.",p:"Si hoy respondiera de nuevo las tres preguntas, ¿qué respondería distinto?"},
-{n:16,g:"mazo",t:"Los Viajes del Aprendiz",i:"Los viajes simbólicos representan el tránsito de la vida humana y la purificación por los elementos: el agua que fecunda, el aire que vivifica y el fuego que purifica. Cada tramo es más sereno que el anterior, como el paso del desorden de las pasiones al dominio de uno mismo.",p:"¿Qué prueba de mi vida me ha purificado más, y qué dejó en mí?"},
-{n:30,g:"mazo",t:"Los Templos Iniciáticos de la Antigüedad",i:"Los pueblos antiguos guardaron su sabiduría en templos de misterios, a los que solo se accedía después de pruebas severas. La Masonería conserva esa tradición con pruebas morales y físicas simbólicas. Su lección: nadie sabe educar si antes no ha recibido educación, ni sabrá mandar si antes no aprendió a obedecer.",p:"¿En qué aspecto de mi vida todavía me toca aprender a obedecer antes de mandar?"},
-{n:14,g:"mazo",t:"El Juramento",r:1,i:"El juramento es una obligación contraída por voluntad propia, que pone a prueba la decisión, el carácter y la energía del hombre. Se presta ante el Ara y compromete el honor del iniciado de por vida. Su enseñanza pública es sencilla: la palabra dada vale lo que vale quien la da.",p:"¿Cumplo mi palabra aun cuando nadie me la recuerda?"},
-{n:13,g:"mazo",t:"El Mandil",i:"Prenda de piel blanca que protege simbólicamente al obrero durante su labor. Representa la pureza de intención y la dignidad del trabajo, material o intelectual. Quien lo porta declara que no se avergüenza de labrar su propia piedra.",p:"¿Qué mancha procuro que no llegue nunca a mi mandil?"},
-{n:15,g:"mazo",t:"Los Saludos, los Tocamientos y las Baterías",r:1,i:"El saludo es una muestra de afecto, respeto y fraternidad. La Masonería adoptó estas demostraciones como lenguaje de unión entre hermanos. Fuera del Templo queda su sentido moral: todo trato entre hermanos ha de ser afectuoso, respetuoso y leal.",p:"¿Mi trato diario con los demás refleja el respeto que expreso en Logia?"},
-{n:17,g:"mazo",t:"La Palabra Sagrada del Aprendiz",r:1,i:"Es un medio discreto de reconocimiento entre Aprendices de cualquier raza, nación o idioma, y nunca se escribe ni se pronuncia fuera del Templo. Su sentido alegórico apunta a la voluntad firme con la que el hombre modela su propia materia para ser útil a sí mismo, servir a sus semejantes y venerar al Ser Supremo.",p:"¿Dónde necesita hoy más firmeza mi voluntad?"},
-{n:18,g:"mazo",t:"La Marcha del Aprendiz",r:1,i:"Todo avance en la vida debe hacerse con orden, firmeza y seguridad, sin detenerse ni desviarse. La marcha del Aprendiz enseña a avanzar hacia la Luz con paso recto. El libro concluye que la marcha se cumple de verdad cuando se enseña al que no sabe.",p:"¿Qué paso concreto daré este mes para avanzar con orden?"},
-{n:19,g:"mazo",t:"La Edad del Aprendiz",i:"La edad masónica no mide los años vividos, sino el adelanto en el trabajo y el grado alcanzado. Remite a los tres periodos de toda existencia: nacimiento, vida y muerte. El Aprendiz es, simbólicamente, alguien que acaba de nacer a la Luz.",p:"Si mi edad se midiera por lo que he aprendido, ¿cuántos años tendría?"},
-{n:20,g:"mazo",t:"Los Toques",r:1,i:"Los toques forman parte del lenguaje de reconocimiento que se practica con discreción. Su enseñanza filosófica es que en el Taller nada es ocioso: cada signo, herramienta y objeto contiene una lección. Por eso al Templo jamás se va a perder el tiempo.",p:"¿Qué detalle de la Logia he mirado sin preguntarme todavía qué enseña?"},
-// ---- LA REGLA
-{n:3,g:"regla",t:"El Templo",i:"La Logia representa el universo: su largo va de Oriente a Occidente, su ancho de Norte a Sur y su altura de la tierra al cielo. Es el espacio ordenado donde se trabaja la piedra. La palabra Logia recuerda el lugar de reunión y de trabajo de los antiguos constructores.",p:"¿Qué orden necesita el templo interior que estoy construyendo?"},
-{n:4,g:"regla",t:"La Columna B",i:"Junto a ella trabajan los Aprendices y a su pie se coloca la piedra bruta. Representa las fuerzas que sostienen al universo en movimiento armónico y en constante evolución. Su enseñanza se completa con la otra columna, en los grados siguientes.",p:"¿Qué me sostiene cuando mi trabajo se vuelve difícil?"},
-{n:5,g:"regla",t:"Las Doce Columnas",i:"Rodean el Templo y representan las ciencias que se cultivan en el seno de la Masonería y el ciclo completo del año. Recuerdan que la inteligencia humana puede crecer sin límite y que la Sabiduría, la Fuerza y la Belleza sostienen toda obra.",p:"¿Qué ciencia o conocimiento me propongo cultivar este año?"},
-{n:6,g:"regla",t:"El Ara",i:"Es el altar de los juramentos. Sobre ella descansan el Libro de la Ley, la Escuadra y el Compás. Recuerda que el compromiso masónico se contrae ante lo más alto que cada hombre reconoce en su conciencia.",p:"¿Ante qué principios rindo cuentas cuando nadie me ve?"},
-{n:11,g:"regla",t:"Los Tronos",i:"El Venerable Maestro preside en Oriente y los dos Vigilantes dirigen las columnas. Las tres dignidades evocan el curso del sol, del nacimiento a la plenitud y al ocaso, y personifican la Sabiduría, la Fuerza y la Belleza.",p:"¿Qué puedo aprender del servicio de quienes hoy dirigen el Taller?"},
-{n:10,g:"regla",t:"Las Luces",i:"En sentido simbólico la Luz es la Ciencia, la Verdad y la Razón. Recibir la Luz es empezar a ver con entendimiento. Las Grandes Luces de la Logia son el Libro de la Ley, la Escuadra y el Compás; las demás se irán conociendo al subir de grado.",p:"¿Qué verdad he empezado a ver desde que recibí la Luz?"},
-{n:33,g:"regla",t:"La Biblia",i:"Es el Libro de la Ley que, abierto sobre el Ara junto con la Escuadra y el Compás, forma las Tres Grandes Luces. El libro explica que se adopta por ser el texto sagrado predominante en nuestro país y que sin él los trabajos no se consideran regulares. Representa la ley moral a la que cada hermano se obliga según su propia fe.",p:"¿Qué lugar ocupa en mi vida la ley moral que acepté al iniciarme?"},
-{n:8,g:"regla",t:"La Escuadra",i:"Instrumento que verifica el ángulo recto. Simboliza la rectitud de los actos y la justicia, y es la joya del Venerable Maestro. Enseña a ajustar la conducta a la ley moral.",p:"¿Qué acto reciente no pasaría la prueba de la escuadra?"},
-{n:9,g:"regla",t:"El Compás",i:"Traza círculos alrededor de un punto fijo: enseña a medir y limitar los deseos y a mantenerse en el justo límite frente a los demás. Al cerrar los trabajos queda plegado junto al Libro cerrado y la Escuadra, en reposo.",p:"¿Qué deseo necesito mantener dentro de su justo límite?"},
-{n:12,g:"regla",t:"Las Herramientas del Aprendiz",i:"El mazo y la regla de 24 pulgadas son las herramientas propias del Aprendiz, junto con el cincel. El mazo es la voluntad que golpea; el cincel, el discernimiento que dirige el golpe; la regla, las 24 horas del día bien repartidas entre trabajo, descanso y servicio.",p:"¿Cómo repartí ayer mis 24 horas?"},
-{n:7,g:"regla",t:"La Educación Masónica",i:"La Masonería enseña con emblemas, alegorías y símbolos: figuras que no imponen una verdad, sino que invitan a cada uno a descubrirla. Todo masón tiene derecho a recibir instrucción y el deber de investigar por sí mismo, para luego enseñar a otros.",p:"¿Qué símbolo me intriga hoy y cómo voy a investigarlo?"},
-// ---- EL CINCEL
-{n:24,g:"cincel",t:"Qué es la Masonería",i:"Una institución fundada en la ley natural y en los Antiguos Límites, que busca el perfeccionamiento moral del hombre y el progreso de la humanidad. Sus bases son la creencia en un Ser Supremo, el amor a la humanidad y el respeto a la libertad de pensamiento.",p:"¿Cómo le explicaría a un amigo, en tres frases, qué es la Masonería?"},
-{n:25,g:"cincel",t:"Qué es el Masón",i:"La palabra se asocia al constructor que golpea y labra la piedra. El masón es un hombre libre y de buenas costumbres, que conoce sus deberes y las responsabilidades que contrajo ante el Ara en beneficio de la humanidad.",p:"¿Qué tendría que ver en mí alguien que no sabe que soy masón?"},
-{n:26,g:"cincel",t:"Conceptos del Vicio",i:"El vicio es el hábito que pervierte la voluntad y degrada al hombre y a la sociedad. Conocerlo con detalle es el primer paso para huir de él y para la regeneración moral. Cada fragmento que se retira de esta piedra es un vicio vencido.",p:"¿Cuál es la aspereza que más me cuesta quitar?"},
-{n:27,g:"cincel",t:"Conceptos de la Virtud",i:"La virtud es la disposición constante a obrar el bien. Es requisito para ser admitido y una perfección que se cultiva toda la vida. Su práctica es difícil sin firmeza moral, buenas costumbres y una educación esmerada.",p:"¿Qué virtud quiero que se note más en mí dentro de un año?"},
-{n:28,g:"cincel",t:"Conceptos de la Moral",i:"La moral reúne las normas de conducta que nacen de los usos y costumbres de los pueblos y dan origen a sus leyes. Hay una moral íntima y una moral social; el masón procura que ambas coincidan y que su conducta en familia sea la misma que en público.",p:"¿Soy el mismo en mi casa que en la Logia y en mi trabajo?"},
-{n:21,g:"cincel",t:"El Masón ante la Divinidad",i:"Responde a la primera pregunta de la plancha triangular. La Masonería requiere la creencia en un Ser Supremo y, al mismo tiempo, respeta la fe de cada quien. No impone dogma: reúne a hombres de distintas creencias en un mismo ideal de fraternidad universal.",p:"¿Cómo vivo mi deber para con el Ser Supremo sin juzgar la fe de los demás?"},
-{n:22,g:"cincel",t:"El Masón ante la Sociedad",i:"Responde a la segunda pregunta de la plancha triangular: los deberes para con los semejantes. El masón ha de ser buen ciudadano, buen miembro de su familia y trabajador útil. De ahí el lema que se recuerda al finalizar las tenidas: todos para uno y uno para todos.",p:"¿Qué hice esta semana por alguien que no podía devolverme el favor?"},
-{n:23,g:"cincel",t:"El Masón ante Sí Mismo",i:"Responde a la tercera pregunta de la plancha triangular: los deberes para consigo mismo. Examinar con conciencia los propios actos, cuidar el cuerpo, cultivar la inteligencia y corregir el carácter. Es el núcleo de la piedra, porque nadie puede labrarla por otro.",p:"¿Qué descubrí de mí al trabajar estos temas?"},
-{n:29,g:"cincel",t:"El Número Tres",i:"Es el primer número impar, formado por la unidad y el primer par. Aparece en la naturaleza, en las ciencias y en las religiones, y ordena casi todo el primer grado: tres Grandes Luces, tres dignidades, tres viajes.",p:"¿Qué tres compromisos sostienen hoy mi vida?"},
-{n:31,g:"cincel",t:"Los Tres Puntos",i:"Los tres puntos en triángulo (∴) acompañan las abreviaturas masónicas. Son emblema de la discreción y recuerdan el compromiso contraído ante el Ara. También expresan el equilibrio de tres principios que sostienen la obra.",p:"¿Qué debo guardar con discreción y qué debo compartir con generosidad?"},
-{n:32,g:"cincel",t:"Objeto del Grado de Aprendiz",i:"El grado de Aprendiz es el inicio de la carrera masónica. Enseña moral y civismo, a vivir en sociedad y a conocer las necesidades humanas. Su objeto es formar a un hombre capaz de servir a sus semejantes y de propagar el amor a la humanidad.",p:"Ahora que la piedra está descubierta, ¿qué obra quiero construir con ella?"}
-];
+const {HERR,T}=window.PIEDRA;
 const BY=new Map(T.map(x=>[x.n,x]));
 
 // ---------- estado (solo en este dispositivo)
@@ -404,6 +419,24 @@ function render(){
   else if(parts.length){rv.hidden=false;rv.textContent=`Has retirado ${total} de 33 fragmentos. Ya se lee ${parts.map(g=>FRASES[g]).join(" y ")}.`}
   else if(total){rv.hidden=false;rv.textContent=`Has retirado ${total} de 33 fragmentos. Completa una herramienta para que aparezca la primera palabra.`}
   else rv.hidden=true;
+  revisarRespaldo(total);
+}
+// ---------- recordatorio de respaldo
+function leerR(){try{return JSON.parse(localStorage.getItem("pb-respaldo"))||{}}catch(e){return {}}}
+function escribirR(o){try{localStorage.setItem("pb-respaldo",JSON.stringify(o))}catch(e){}}
+function revisarRespaldo(total){
+  const r=leerR(),notas=Object.keys(S.notes).length,base=r.done||0,dias=r.ts?(Date.now()-r.ts)/864e5:Infinity;
+  const posp=r.posp||0;
+  let msg="";
+  if(!r.ts&&(total>=3||notas>=2))msg="Aún no tienes ningún respaldo.";
+  else if(r.ts&&total-base>=5)msg=`Has retirado ${total-base} fragmentos desde tu último respaldo.`;
+  else if(r.ts&&dias>=21&&(total>base||notas))msg=`Tu último respaldo tiene ${Math.floor(dias)} días.`;
+  const stand=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+  if(msg&&ios&&!stand)msg+=" En iPhone, Safari puede borrar tu avance si pasas varios días sin abrir la página; instalarla como app lo evita.";
+  else if(msg)msg+=" Tu avance vive solo en este dispositivo; un archivo de respaldo lo protege.";
+  const show=!!msg&&total+notas>=posp;
+  $("aviso").hidden=!show;if(show)$("aviso-txt").textContent=msg;
 }
 
 // ---------- ficha
@@ -413,13 +446,22 @@ function abrir(n){
   cur=n;const t=BY.get(n);
   $("f-chip").textContent=`Tema ${t.n} · ${HERR[t.g].nombre}`;$("f-chip").className="chip t-"+t.g;
   $("f-title").textContent=t.t;$("f-idea").textContent=t.i;$("f-preg").textContent=t.p;$("f-res").hidden=!t.r;
+  $("f-libro").innerHTML=`<b>Para profundizar:</b> Tema ${t.n} del libro, páginas ${t.pag}.`;
   $("f-nota").value=S.notes[n]||"";syncToggle();
+  const i=T.indexOf(t),pv=T[i-1],nx=T[i+1];
+  $("f-prev").hidden=!pv;$("f-next").hidden=!nx;
+  if(pv){$("f-prev").textContent="← Tema "+pv.n;$("f-prev").setAttribute("aria-label","Tema anterior: "+pv.t)}
+  if(nx){$("f-next").textContent="Tema "+nx.n+" →";$("f-next").setAttribute("aria-label","Siguiente tema: "+nx.t)}
+  $("f-pos").textContent=(i+1)+" de 33";
+  dlg.scrollTop=0;
   if(typeof dlg.showModal==="function"){if(!dlg.open)dlg.showModal()}else dlg.setAttribute("open","");
 }
 function syncToggle(){const d=isDone(cur);$("f-toggle").textContent=d?"Volver a colocar el fragmento":"Retirar el fragmento";
   $("f-hint").textContent=d?"Este tema ya fue trabajado.":"Hazlo cuando el tema esté estudiado."}
 function cerrar(){if(dlg.open){dlg.close?dlg.close():dlg.removeAttribute("open")}}
 $("f-close").addEventListener("click",cerrar);
+$("f-prev").addEventListener("click",()=>{const i=T.indexOf(BY.get(cur));if(T[i-1])abrir(T[i-1].n)});
+$("f-next").addEventListener("click",()=>{const i=T.indexOf(BY.get(cur));if(T[i+1])abrir(T[i+1].n)});
 dlg.addEventListener("click",e=>{if(e.target===dlg)cerrar()});
 dlg.addEventListener("close",()=>{if(cur!=null&&BTN.get(cur))BTN.get(cur).focus({preventScroll:true})});
 let tmo;$("f-nota").addEventListener("input",e=>{const v=e.target.value;if(v.trim())S.notes[cur]=v;else delete S.notes[cur];clearTimeout(tmo);tmo=setTimeout(()=>{save();render()},300)});
@@ -451,6 +493,7 @@ $("export").addEventListener("click",()=>{
   const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="piedra-bruta-respaldo-"+hoy()+".json";
   document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+  escribirR({ts:Date.now(),done:S.done.length});revisarRespaldo(S.done.length);
   const msg=$("copy-msg");msg.hidden=false;msg.textContent="Respaldo descargado. Guárdalo en un lugar seguro.";
 });
 let pendiente=null;
@@ -479,14 +522,30 @@ $("import-yes").addEventListener("click",()=>{if(!pendiente)return;S=pendiente;p
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
 if("serviceWorker" in navigator&&location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
 const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
-let dismissed=false;try{dismissed=localStorage.getItem("pb-install-no")==="1"}catch(e){}
+let dismissed=false;try{const v=+localStorage.getItem("pb-install-no")||0;dismissed=Date.now()-v<14*864e5}catch(e){}
 let deferred=null;
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;if(!standalone&&!dismissed){$("install").hidden=false;$("install-btn").hidden=false}});
 const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
 if(ios&&!standalone&&!dismissed){$("install").hidden=false;$("install-txt").textContent="En Safari toca Compartir y luego “Agregar a inicio”. Quedará como app y funcionará sin internet."}
 $("install-btn").addEventListener("click",async()=>{if(!deferred)return;deferred.prompt();try{await deferred.userChoice}catch(e){}deferred=null;$("install").hidden=true});
-$("install-no").addEventListener("click",()=>{$("install").hidden=true;try{localStorage.setItem("pb-install-no","1")}catch(e){}});
+$("install-no").addEventListener("click",()=>{$("install").hidden=true;try{localStorage.setItem("pb-install-no",String(Date.now()))}catch(e){}});
 window.addEventListener("appinstalled",()=>{$("install").hidden=true});
+
+$("aviso-btn").addEventListener("click",()=>$("export").click());
+$("aviso-no").addEventListener("click",()=>{const r=leerR();r.posp=S.done.length+Object.keys(S.notes).length+3;escribirR(r);$("aviso").hidden=true});
+
+// ---------- versión para imprimir
+$("print").addEventListener("click",()=>{
+  const fecha=new Date().toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"});
+  const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  let h=`<header class="pr-head"><div class="eyebrow">Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8 · Instrucción del Primer Grado</div><h1>Bitácora del cantero</h1>
+  <p>Aprendiz: <span class="pr-line"></span></p><p>Fecha: ${fecha} · Fragmentos retirados: ${S.done.length} de 33</p></header>`;
+  Object.entries(HERR).forEach(([g,hh])=>{h+=`<h2>${hh.nombre}</h2>`;T.filter(t=>t.g===g).forEach(t=>{
+    h+=`<article class="pr-tema"><h3>Tema ${t.n}. ${esc(t.t)}${isDone(t.n)?" <span>· retirado</span>":""}</h3><p class="pr-preg">${esc(t.p)}</p>`+
+      (S.notes[t.n]?`<p class="pr-nota">${esc(S.notes[t.n]).replace(/\n/g,"<br>")}</p>`:`<p class="pr-vacia">Sin anotaciones.</p>`)+`</article>`})});
+  h+=`<p class="pr-firma">Revisó: <span class="pr-line"></span> M∴ M∴</p>`;
+  $("impresion").innerHTML=h;window.print();
+});
 
 render();
 })();
