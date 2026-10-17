@@ -1,12 +1,11 @@
 // La Piedra Bruta del Aprendiz · trabajo sin conexión
 // Al publicar cambios, sube este número (v2.2, v2.3...) para que las apps instaladas se actualicen.
-const VERSION = "piedra-bruta-v4.0";
+const VERSION = "piedra-bruta-v5.0";
 const APP = [
   "./", "index.html", "temas.js", "manifest.webmanifest",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png",
-  "fonts/marcellus-sc-400.woff", "fonts/marcellus-400.woff",
-  "fonts/alegreya-400.woff", "fonts/alegreya-500.woff", "fonts/alegreya-400-italic.woff",
-  "fonts/alegreya-sans-500.woff", "fonts/alegreya-sans-700.woff"
+  "fonts/bodoni-moda-500.woff2", "fonts/bodoni-moda-500-italic.woff2", "fonts/jost.woff2",
+  "assets/cantero-piedra.jpg", "assets/cantero-mandil.jpg", "assets/delfos.jpg", "assets/cantera-detalle.jpg"
 ];
 
 self.addEventListener("install", e => {
@@ -25,6 +24,6 @@ self.addEventListener("fetch", e => {
       .catch(() => caches.match(key)));
     return;
   }
-  // Tipografías e íconos: la copia guardada primero.
+  // Tipografías, imágenes e íconos: la copia guardada primero.
   e.respondWith(caches.match(req).then(hit => hit || fetch(req)));
 });

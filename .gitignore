@@ -24,3 +24,4 @@ piedra-bruta-respaldo-*.json
 
 # Configuración local de Claude Code (vista previa)
 .claude/
+.taste-skill/
