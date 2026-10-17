@@ -198,6 +198,25 @@ footer{display:grid;gap:8px;font-size:15.5px;color:var(--muted)}
 .autoria .firma b{font-style:normal;font-weight:500}
 .autoria .k{font-family:var(--f-label);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 
+/* Composición centrada: encabezados, introducciones y notas sobre un mismo eje; las listas de lectura conservan su alineación. */
+header{margin-inline:auto;justify-items:center;text-align:center}
+header .lede{margin-inline:auto}
+section>h2,.sec-head h2{text-align:center}
+.sec-head{flex-direction:column;align-items:center;text-align:center;gap:18px}
+.sec-head p{margin-inline:auto}
+.sec-head .actions{justify-content:center}
+#import-confirm,#copy-msg{justify-content:center;text-align:center}
+.steps li{justify-items:center;text-align:center}
+.steps p{max-width:30ch}
+.revelada{border-left:0;padding:14px 0 0;margin-inline:auto;text-align:center;position:relative}
+.revelada::before{content:"";position:absolute;top:0;left:50%;width:48px;height:1px;background:var(--gold);transform:translateX(-50%)}
+.install{text-align:center;justify-items:center;max-width:720px;margin-inline:auto;border-left:1px solid var(--line);border-top:1px solid var(--gold)}
+.install .actions{justify-content:center}
+.tool{text-align:left}
+.tool h3,.tool .sub{text-align:center}
+footer{justify-items:center;text-align:center}
+footer>p{max-width:72ch}
+@media (max-width:600px){.topbar{flex-direction:column;justify-content:center;gap:12px}.toggles{justify-content:center;flex-wrap:wrap}.prog .lbl{justify-content:space-between}}
 #impresion{display:none}
 @media print{
   @page{margin:16mm 14mm}
