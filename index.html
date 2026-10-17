@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La Piedra Bruta del Aprendiz</title>
 <meta name="description" content="Instrucción del Primer Grado: los 33 temas del Aprendiz trabajados como una piedra bruta que se desbasta.">
-<meta name="theme-color" content="#E8EBE9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#13171B" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0A0D12">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -25,117 +24,188 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Piedra bruta de 33 fragmentos con el título La Piedra Bruta del Aprendiz">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" href="fonts/cinzel-700.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/marcellus-sc-400.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="fonts/alegreya-400.woff" as="font" type="font/woff" crossorigin>
 <style>
-@font-face{font-family:"Cinzel";src:url("fonts/cinzel-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:"Cinzel";src:url("fonts/cinzel-700.woff") format("woff");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Marcellus SC";src:url("fonts/marcellus-sc-400.woff") format("woff");font-weight:400;font-display:swap}
+@font-face{font-family:"Marcellus";src:url("fonts/marcellus-400.woff") format("woff");font-weight:400;font-display:swap}
 @font-face{font-family:"Alegreya";src:url("fonts/alegreya-400.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Alegreya";src:url("fonts/alegreya-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:"Alegreya";src:url("fonts/alegreya-400-italic.woff") format("woff");font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:"Alegreya Sans";src:url("fonts/alegreya-sans-500.woff") format("woff");font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:"Alegreya Sans";src:url("fonts/alegreya-sans-700.woff") format("woff");font-weight:700;font-style:normal;font-display:swap}
-/* Layout: una sola columna de lectura; la piedra como pieza central a lo ancho, la bitácora en tres columnas (una por herramienta) que se apilan en móvil. */
+@font-face{font-family:"Alegreya Sans";src:url("fonts/alegreya-sans-500.woff") format("woff");font-weight:500;font-display:swap}
+@font-face{font-family:"Alegreya Sans";src:url("fonts/alegreya-sans-700.woff") format("woff");font-weight:700;font-display:swap}
+
+/* Diseño: la Cámara en penumbra. Una sola luz cae sobre la piedra desde lo alto a la izquierda; todo lo demás se retira a la sombra.
+   Columna de lectura a la izquierda, la piedra como escenario a todo el ancho, plancha de trazar que aparece con el avance. */
 :root{
-  --bg:#E8EBE9; --surface:#F5F6F4; --ink:#1C2227; --muted:#59646C; --line:#C7CEcB;
-  --accent:#24418C; --accent-ink:#FFFFFF;
-  --mazo:#8A4A2E; --regla:#7E6116; --cincel:#2E5C6A;
-  --stone-seam:#3B3933; --stone-label:#F3EFE6; --polish-a:#DCD6C9; --polish-b:#B7AF9F; --engrave:#4A443A; --engrave-hi:#F1ECE2;
-  --f-display:"Cinzel","Trajan Pro","Times New Roman",serif;
+  color-scheme:dark;
+  --bg:#0A0D12; --bg-glow:#121722; --surface:#12161E; --surface-2:#171C26;
+  --ink:#E8E2D4; --muted:#8D887D; --line:#252B35;
+  --gold:#C3A25E; --gold-ink:#17130B; --gold-soft:rgba(195,162,94,.16);
+  --lapis:#7D96D8;
+  --mazo:#C78E6C; --regla:#CDB173; --cincel:#8DB3BC;
+  --light:rgba(255,226,170,.13); --shade:rgba(4,6,10,.78);
+  --stone-label:#EDE6D6; --stone-seam:#1C1A16; --polish-a:#B9B09E; --polish-b:#7C7465; --engrave:#5E4A22; --engrave-hi:rgba(255,244,220,.55);
+  --tile-a:rgba(232,226,212,.10); --tile-b:transparent;
+  --f-display:"Marcellus SC","Marcellus","Trajan Pro","Times New Roman",serif;
+  --f-title:"Marcellus","Times New Roman",serif;
   --f-body:"Alegreya",Georgia,"Times New Roman",serif;
   --f-label:"Alegreya Sans","Gill Sans","Segoe UI",sans-serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#13171B; --surface:#1B2126; --ink:#E5E8E6; --muted:#9BA6AE; --line:#2E373E;
-  --accent:#93AAF0; --accent-ink:#0F1520; --mazo:#D48C6A; --regla:#D6B25C; --cincel:#80B4C2; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#13171B; --surface:#1B2126; --ink:#E5E8E6; --muted:#9BA6AE; --line:#2E373E;
-  --accent:#93AAF0; --accent-ink:#0F1520; --mazo:#D48C6A; --regla:#D6B25C; --cincel:#80B4C2; color-scheme:dark}
-
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#E7E5DF; --bg-glow:#F4F2EC; --surface:#F3F1EB; --surface-2:#ECE9E1;
+  --ink:#1A1D23; --muted:#5E5F60; --line:#CFCBC1;
+  --gold:#7E5F1E; --gold-ink:#FFFFFF; --gold-soft:rgba(126,95,30,.12);
+  --lapis:#2B4790; --mazo:#8A4A2E; --regla:#7A5D16; --cincel:#2E5C6A;
+  --light:rgba(255,250,235,.35); --shade:rgba(60,55,45,.28);
+  --tile-a:rgba(26,29,35,.08); --polish-a:#DCD6C9; --polish-b:#B3AB9B;
+}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-img{max-width:100%}
 [hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.55;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
-.wrap{max-width:1000px;margin:0 auto;display:grid;gap:44px}
-header{padding-top:44px;display:grid;gap:12px;max-width:760px}
-.eyebrow{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-h1{font-family:var(--f-display);font-weight:700;font-size:clamp(34px,6vw,58px);line-height:1.05;margin:0;letter-spacing:.02em;text-wrap:balance}
-h2{font-family:var(--f-display);font-weight:500;font-size:clamp(22px,3vw,28px);margin:0;letter-spacing:.02em;text-wrap:balance}
+html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--bg)}
+img{max-width:100%}
+body{margin:0;background:radial-gradient(1200px 700px at 18% -10%,var(--bg-glow),transparent 70%),var(--bg);background-attachment:fixed;color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px;transition:background-color .4s}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:56px}
 p{margin:0}
-.lede{font-size:20px;color:var(--ink);max-width:62ch}
 .muted{color:var(--muted)}
 
-/* Piedra */
-.stone-card{display:grid;gap:16px}
-.stone-frame{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:clamp(8px,2vw,20px)}
-#stone{width:100%;height:auto;display:block;max-width:100%}
+/* Encabezado */
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:22px;flex-wrap:wrap}
+.sello{font-family:var(--f-display);letter-spacing:.24em;font-size:13px;color:var(--muted)}
+.sello b{color:var(--gold);font-weight:400}
+.toggles{display:flex;gap:6px}
+.chipbtn{all:unset;cursor:pointer;font-family:var(--f-label);font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 12px;min-height:20px}
+.chipbtn[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.chipbtn:hover{color:var(--ink)}
+.chipbtn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+header{display:grid;gap:16px;max-width:780px;padding-top:4px}
+.eyebrow{font-family:var(--f-label);font-weight:700;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7.4vw,84px);line-height:.98;margin:0;letter-spacing:.06em;text-wrap:balance}
+h1 span{display:block;font-size:.42em;letter-spacing:.32em;color:var(--muted);margin-top:.5em}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(24px,3.2vw,32px);margin:0;letter-spacing:.08em;text-wrap:balance}
+.lede{font-size:21px;max-width:58ch;color:var(--ink)}
+.lede em{font-style:italic;color:var(--gold)}
+
+/* Escenario de la piedra */
+.stone-card{display:grid;gap:22px}
+.stone-frame{position:relative;border-radius:4px;overflow:hidden;padding:clamp(6px,2.5vw,36px) clamp(0px,2vw,28px);
+  background:radial-gradient(ellipse 60% 70% at 30% 20%,var(--light),transparent 72%);isolation:isolate}
+.trazado{position:absolute;inset:0;width:100%;height:100%;z-index:-1;-webkit-mask-image:radial-gradient(ellipse 55% 60% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 55% 60% at 50% 50%,#000 55%,transparent 100%);opacity:calc(.07 + var(--avance,0) * .5);transition:opacity 1.2s ease;pointer-events:none}
+.trazado *{fill:none;stroke:var(--gold);stroke-width:1;vector-effect:non-scaling-stroke}
+.trazado .pt{fill:var(--gold);stroke:none}
+.lampara{position:absolute;inset:0;pointer-events:none;z-index:2;mix-blend-mode:soft-light;opacity:0;transition:opacity .5s;
+  background:radial-gradient(circle 180px at var(--lx,30%) var(--ly,30%),rgba(255,236,200,.55),transparent 70%)}
+.stone-frame:hover .lampara{opacity:1}
+@media (hover:none){.stone-frame{animation:respira 7s ease-in-out infinite}}
+@keyframes respira{0%,100%{background-position:0 0,0 0}50%{background-position:2% 3%,0 0}}
+#stone{position:relative;z-index:1;width:100%;height:auto;display:block;max-width:100%;overflow:visible}
 .frag{cursor:pointer;outline:none}
-.frag .seam{fill:none;stroke:var(--stone-seam);stroke-width:2;stroke-linejoin:round}
-.frag:hover .tint,.frag:focus-visible .tint{fill-opacity:.0}
-.frag:focus-visible .seam{stroke:var(--accent);stroke-width:5}
-.frag .num{font-family:var(--f-display);font-weight:700;font-size:20px;fill:var(--stone-label);paint-order:stroke;stroke:rgba(0,0,0,.45);stroke-width:3px;pointer-events:none;text-anchor:middle;dominant-baseline:central}
-.frag{transform-box:fill-box;transform-origin:center;transition:transform .7s cubic-bezier(.5,0,.75,0),opacity .7s ease-in}
+.frag .seam{fill:none;stroke:var(--stone-seam);stroke-width:2.2;stroke-linejoin:round;transition:stroke .3s}
+.frag .sombra{fill:#05070A;fill-opacity:.38;transition:fill-opacity .35s}
+.frag:hover .sombra,.frag:focus-visible .sombra,.frag.proxima .sombra{fill-opacity:0}
+.frag:focus-visible .seam{stroke:var(--gold);stroke-width:4}
+.frag.proxima .seam{stroke:#E2C27E;stroke-width:3;filter:drop-shadow(0 0 6px rgba(226,194,126,.85));animation:latido 2.8s ease-in-out infinite}
+@keyframes latido{0%,100%{stroke-opacity:.55}50%{stroke-opacity:1}}
+.frag .num{font-family:var(--f-display);font-size:21px;letter-spacing:.06em;fill:var(--stone-label);fill-opacity:.62;paint-order:stroke;stroke:rgba(0,0,0,.55);stroke-width:3px;pointer-events:none;text-anchor:middle;dominant-baseline:central;transition:fill-opacity .3s}
+.frag:hover .num,.frag.proxima .num{fill-opacity:1}
+.frag{transform-box:fill-box;transform-origin:center;transition:transform .8s cubic-bezier(.5,0,.75,0),opacity .8s ease-in}
 .frag.cae{opacity:0;pointer-events:none}
 .frag.fuera{display:none}
-@media (prefers-reduced-motion: reduce){.frag{transition:opacity .2s linear}.frag.cae{transform:none!important}}
+.resplandor{pointer-events:none;mix-blend-mode:screen}
+.grabado text{transition:fill 1.4s ease,filter 1.4s ease}
+.grabado.encendida text.fg{fill:#8A6A2A;filter:drop-shadow(0 0 5px rgba(232,196,120,.85))}
+canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
 
-.progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.prog{display:grid;gap:6px;min-width:0}
-.prog .lbl{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;gap:8px}
+.progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.prog{display:grid;gap:8px;min-width:0}
+.prog .lbl{font-family:var(--f-label);font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;gap:8px}
 .prog .lbl span:last-child{font-variant-numeric:tabular-nums;color:var(--muted)}
-.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;transition:width .5s ease}
+.bar{height:8px;overflow:hidden;background:repeating-conic-gradient(var(--tile-a) 0 25%,var(--tile-b) 0 50%) 0 0/8px 8px}
+.bar i{display:block;height:100%;width:0;transition:width .8s ease}
 .t-mazo{color:var(--mazo)} .t-regla{color:var(--regla)} .t-cincel{color:var(--cincel)}
 .b-mazo{background:var(--mazo)} .b-regla{background:var(--regla)} .b-cincel{background:var(--cincel)}
-.revelada{font-size:19px;border-left:3px solid var(--accent);padding-left:14px}
+.revelada{font-size:19px;max-width:66ch;padding-left:16px;border-left:1px solid var(--gold)}
+.revelada i{color:var(--gold)}
+
+.mosaico{height:8px;background:repeating-conic-gradient(var(--tile-a) 0 25%,var(--tile-b) 0 50%) 0 0/8px 8px;opacity:.9}
 
 /* Cómo trabajar */
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:s;padding:0;margin:0;list-style:none}
-.steps li{display:grid;gap:4px;min-width:0;counter-increment:s}
-.steps li::before{content:counter(s);font-family:var(--f-display);font-weight:700;font-size:28px;color:var(--accent);line-height:1}
-.steps b{font-family:var(--f-label);font-size:16px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;counter-reset:s;padding:0;margin:0;list-style:none}
+.steps li{display:grid;gap:6px;min-width:0;align-content:start}
+.steps .rn{font-family:var(--f-display);font-size:30px;color:var(--gold);line-height:1;letter-spacing:.08em}
+.steps b{font-family:var(--f-label);font-size:16px;letter-spacing:.02em}
 .steps p{font-size:16.5px;color:var(--muted)}
 
 /* Bitácora */
-.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 24px}
-.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
-.tool{display:grid;gap:10px;align-content:start;min-width:0}
-.tool h3{font-family:var(--f-display);font-size:20px;margin:0;font-weight:700}
-.tool .sub{font-family:var(--f-label);font-size:14px;color:var(--muted);letter-spacing:.02em}
-.tool ul{list-style:none;margin:4px 0 0;padding:0;display:grid;border-top:1px solid var(--line)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 24px}
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.tool{display:grid;gap:8px;align-content:start;min-width:0}
+.tool h3{font-family:var(--f-display);font-size:21px;margin:0;font-weight:400;letter-spacing:.08em}
+.tool .sub{font-family:var(--f-label);font-size:14px;color:var(--muted);letter-spacing:.03em}
+.tool ul{list-style:none;margin:6px 0 0;padding:0;display:grid;border-top:1px solid var(--line)}
 .tool li{border-bottom:1px solid var(--line)}
-.tema-btn{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:2.2em minmax(0,1fr) auto;gap:8px;align-items:baseline;padding:9px 4px;cursor:pointer;font-size:16.5px;line-height:1.3}
-.tema-btn:hover{background:color-mix(in srgb,var(--ink) 5%,transparent)}
-.tema-btn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.tema-btn .n{font-family:var(--f-display);font-weight:700;font-variant-numeric:tabular-nums}
-.tema-btn .st{font-family:var(--f-label);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.tema-btn{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:3.1em minmax(0,1fr) auto;gap:8px;align-items:baseline;padding:10px 4px;cursor:pointer;font-size:16.5px;line-height:1.35;transition:background .2s}
+.tema-btn:hover{background:var(--gold-soft)}
+.tema-btn:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.tema-btn .n{font-family:var(--f-display);font-size:15px;letter-spacing:.05em;font-variant-numeric:tabular-nums}
+.tema-btn .st{font-family:var(--f-label);font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .tema-btn.hecho .t{color:var(--muted)}
-.tema-btn.hecho .st{color:var(--accent)}
-.res-mark{font-family:var(--f-label);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:3px;padding:0 4px;margin-left:6px;color:var(--muted);vertical-align:2px}
+.tema-btn.hecho .st{color:var(--gold)}
+.tema-btn.sig .st{color:var(--gold)}
+.res-mark{font-family:var(--f-label);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);border-radius:2px;padding:0 4px;margin-left:6px;color:var(--muted);vertical-align:2px}
 
 .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.btn{font-family:var(--f-label);font-weight:700;font-size:15px;letter-spacing:.02em;border-radius:4px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
-.btn:hover{border-color:var(--muted)}
-.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn.quiet{background:transparent}
-.install{display:grid;gap:12px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);border-radius:6px;padding:14px 16px}
-.autoria{display:grid;gap:6px;padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--line);color:var(--ink);max-width:70ch}
-.autoria .k{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.btn{font-family:var(--f-label);font-weight:700;font-size:14.5px;letter-spacing:.04em;border-radius:2px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--ink);transition:border-color .2s,background .2s}
+.btn:hover{border-color:var(--gold)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.btn.primary{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.quiet{border-color:transparent;color:var(--muted)}
+.btn.quiet:hover{color:var(--ink);border-color:var(--line)}
+.note{font-family:var(--f-label);font-size:14px;color:var(--muted)}
+.install{display:grid;gap:12px;border:1px solid var(--line);border-left:2px solid var(--gold);background:var(--surface);padding:16px 18px}
+
+/* Ficha: una losa */
+dialog{border:1px solid var(--line);border-top:1px solid var(--gold);border-radius:3px;background:linear-gradient(180deg,var(--surface-2),var(--surface));color:var(--ink);padding:0;width:min(660px,calc(100vw - 24px));max-height:calc(100dvh - 24px);box-shadow:0 30px 80px rgba(0,0,0,.55)}
+dialog::backdrop{background:rgba(4,6,10,.62);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+dialog[open]{animation:sube .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes sube{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.ficha{display:grid;gap:18px;padding:26px clamp(18px,4.5vw,36px) 22px}
+.ficha .top{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.chip{font-family:var(--f-label);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase}
+.ficha h2{font-family:var(--f-title);font-size:clamp(26px,4.6vw,36px);letter-spacing:.02em;line-height:1.15}
+.ficha .rn-big{font-family:var(--f-display);color:var(--gold);font-size:15px;letter-spacing:.3em;display:block;margin-bottom:6px}
+.ficha .k{font-family:var(--f-label);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.reserva{font-size:16px;border:1px dashed var(--line);padding:10px 12px;color:var(--muted)}
+.pregunta{font-style:italic;font-size:20px;color:var(--gold)}
+textarea{width:100%;min-height:120px;resize:vertical;font:inherit;font-size:17px;line-height:1.55;color:var(--ink);background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:2px;padding:12px 14px}
+:root[data-theme="light"] textarea{background:#fff}
+textarea:focus{outline:1px solid var(--gold);border-color:var(--gold)}
+label.k{display:block}
+.x{all:unset;cursor:pointer;font-family:var(--f-label);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 8px}
+.x:hover{color:var(--ink)}
+.x:focus-visible{outline:2px solid var(--gold)}
 .libro{font-family:var(--f-label);font-size:15px;color:var(--muted)}
 .libro b{color:var(--ink)}
 .fnav{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px solid var(--line);padding-top:14px}
 .fnav .btn{padding:10px 12px;min-width:44px}
+
+footer{display:grid;gap:8px;font-size:15.5px;color:var(--muted)}
+.autoria{display:grid;gap:10px;justify-items:center;text-align:center;margin:28px auto 0;padding-top:28px;border-top:1px solid var(--line);color:var(--ink);max-width:60ch;width:100%}
+.autoria .firma{margin-top:4px;font-style:italic}
+.autoria .firma b{font-style:normal;font-weight:500}
+.autoria .k{font-family:var(--f-label);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
 #impresion{display:none}
 @media print{
   @page{margin:16mm 14mm}
-  body{background:#fff;color:#111;padding:0;font-size:11.5pt}
+  html,body{background:#fff!important;color:#111;padding:0;font-size:11.5pt}
   body>*:not(#impresion){display:none!important}
-  #impresion{display:block}
-  #impresion h1{font-family:var(--f-display);font-size:22pt;margin:4pt 0 8pt}
-  #impresion h2{font-family:var(--f-display);font-size:14pt;margin:16pt 0 6pt;border-bottom:1px solid #999;padding-bottom:3pt;break-after:avoid}
+  #impresion{display:block;color:#111}
+  #impresion h1{font-family:var(--f-display);font-size:22pt;margin:4pt 0 8pt;color:#111}
+  #impresion h2{font-family:var(--f-display);font-size:14pt;margin:16pt 0 6pt;border-bottom:1px solid #999;padding-bottom:3pt;break-after:avoid;color:#111}
   #impresion .eyebrow{color:#444}
   .pr-head p{margin:2pt 0}
   .pr-line{display:inline-block;min-width:240px;border-bottom:1px solid #333}
@@ -143,49 +213,42 @@ p{margin:0}
   .pr-tema h3{font-family:var(--f-label);font-size:11.5pt;margin:0 0 2pt}
   .pr-tema h3 span{font-weight:500;color:#555}
   .pr-preg{font-style:italic;color:#333;margin:0 0 3pt}
-  .pr-nota{margin:0;white-space:normal}
+  .pr-nota{margin:0}
   .pr-vacia{margin:0;color:#888}
   .pr-firma{margin-top:28pt}
 }
-.note{font-family:var(--f-label);font-size:14px;color:var(--muted)}
-
-/* Ficha */
-dialog{border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);padding:0;width:min(640px,calc(100vw - 32px));max-height:calc(100dvh - 32px)}
-dialog::backdrop{background:rgba(10,12,14,.55)}
-.ficha{display:grid;gap:16px;padding:24px clamp(18px,4vw,32px) 24px}
-.ficha .top{display:flex;justify-content:space-between;align-items:start;gap:12px}
-.chip{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
-.ficha h2{font-size:clamp(22px,4vw,30px)}
-.ficha .k{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.reserva{font-size:16px;border:1px dashed var(--line);border-radius:4px;padding:10px 12px;color:var(--muted)}
-.pregunta{font-style:italic;font-size:19px}
-textarea{width:100%;min-height:120px;resize:vertical;font:inherit;font-size:17px;line-height:1.5;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:10px 12px}
-textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
-label.k{display:block}
-.x{all:unset;cursor:pointer;font-family:var(--f-label);font-size:14px;font-weight:700;color:var(--muted);padding:4px 6px;border-radius:3px}
-.x:focus-visible{outline:2px solid var(--accent)}
-
-footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:6px;font-size:15.5px;color:var(--muted)}
-
-@media (max-width:820px){
+@media (max-width:860px){
   .tools{grid-template-columns:minmax(0,1fr)}
   .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media (max-width:460px){
+@media (max-width:480px){
   body{font-size:17px}
-  .frag .num{font-size:36px;stroke-width:5px}
-  .stone-frame{padding:4px}
-  .progress{grid-template-columns:minmax(0,1fr)}
+  .wrap{gap:44px}
+  .progress{grid-template-columns:minmax(0,1fr);gap:12px}
   .steps{grid-template-columns:minmax(0,1fr)}
+  .frag .num{font-size:30px;stroke-width:5px}
+  .stone-frame{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)))}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important}
+  .frag{transition:opacity .2s linear}.frag.cae{transform:none!important}
+  dialog[open]{animation:none}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="topbar">
+    <div class="sello"><b>∴</b> Lázaro Cárdenas No. 8</div>
+    <div class="toggles">
+      <button class="chipbtn" id="t-luz" type="button" aria-pressed="false">Templo iluminado</button>
+      <button class="chipbtn" id="t-son" type="button" aria-pressed="false">Sonido</button>
+    </div>
+  </div>
   <header>
-    <div class="eyebrow">Instrucción del Primer Grado · R∴ E∴ A∴ A∴</div>
-    <h1>La Piedra Bruta del Aprendiz</h1>
-    <p class="lede">Treinta y tres temas, treinta y tres fragmentos. Cada tema que estudias retira una aspereza de la piedra. Cuando hayas trabajado los 33, quedará a la vista lo que la piedra siempre llevó dentro.</p>
+    <div class="eyebrow">Instrucción del Primer Grado · <span style="white-space:nowrap">R∴ E∴ A∴ A∴</span></div>
+    <h1>La Piedra Bruta<span>del Aprendiz</span></h1>
+    <p class="lede">Treinta y tres temas, treinta y tres fragmentos. Cada tema que estudias retira una aspereza. Cuando hayas trabajado los treinta y tres, quedará a la vista <em>lo que la piedra siempre llevó dentro</em>.</p>
     <p class="muted">Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8 · Gran Logia “Cosmos” del Estado de Chihuahua</p>
   </header>
 
@@ -201,20 +264,24 @@ footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:6px;fo
 
   <section class="stone-card" aria-labelledby="h-piedra">
     <h2 id="h-piedra" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">La piedra</h2>
-    <div class="stone-frame">
+    <div class="stone-frame" id="escena">
+      <svg class="trazado" id="trazado" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="lampara" aria-hidden="true"></div>
+      <canvas class="polvo" id="polvo" aria-hidden="true"></canvas>
       <svg id="stone" viewBox="0 0 1000 560" role="group" aria-label="Piedra bruta de 33 fragmentos. Cada fragmento abre la ficha de un tema."></svg>
     </div>
     <div class="progress" id="progress"></div>
     <p class="revelada" id="revelada" hidden></p>
   </section>
 
+  <div class="mosaico" aria-hidden="true"></div>
   <section aria-labelledby="h-como" style="display:grid;gap:18px">
     <h2 id="h-como">Cómo trabajar la piedra</h2>
     <ol class="steps">
-      <li><b>Elige un fragmento</b><p>Toca un número en la piedra o un tema de la bitácora. El orden sugerido va del mazo al cincel.</p></li>
-      <li><b>Estudia el tema</b><p>Lee la idea central, consulta el libro de los 33 temas y llévalo a la instrucción en Logia.</p></li>
-      <li><b>Escribe en tu bitácora</b><p>Responde la pregunta y anota lo que hoy quitaste de ti. Tus notas se guardan solo en este dispositivo; descarga un respaldo de vez en cuando.</p></li>
-      <li><b>Retira el fragmento</b><p>Cuando el tema esté trabajado, retira su fragmento. Poco a poco aparecerá la frase oculta.</p></li>
+      <li><span class="rn" aria-hidden="true">I</span><b>Elige un fragmento</b><p>Toca un fragmento de la piedra o un tema de la bitácora. El que brilla es el siguiente en el orden sugerido.</p></li>
+      <li><span class="rn" aria-hidden="true">II</span><b>Estudia el tema</b><p>Lee la idea central, consulta el libro de los 33 temas y llévalo a la instrucción en Logia.</p></li>
+      <li><span class="rn" aria-hidden="true">III</span><b>Escribe en tu bitácora</b><p>Responde la pregunta y anota lo que hoy quitaste de ti. Tus notas se guardan solo en este dispositivo; descarga un respaldo de vez en cuando.</p></li>
+      <li><span class="rn" aria-hidden="true">IV</span><b>Retira el fragmento</b><p>Cuando el tema esté trabajado, retira su fragmento. Poco a poco aparecerá la frase oculta.</p></li>
     </ol>
   </section>
 
@@ -248,27 +315,30 @@ footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:6px;fo
     <div class="tools" id="tools"></div>
   </section>
 
+  <div class="mosaico" aria-hidden="true"></div>
   <footer>
-    <div class="autoria">
-      <div class="k">Declaración de autoría</div>
-      <p>Este material fue preparado por <b>Jesús Antonio Díaz Franco</b>, M∴ M∴, de la Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8. No busca créditos ni reconocimiento personal. Es una manera de extender al medio digital el conocimiento que se comparte en Logia y de facilitar que llegue a cada Aprendiz. La doctrina pertenece a la tradición de la Orden y a los autores citados.</p>
-    </div>
     <p>Fuente: Adolfo Terrones Benítez y Alfonso León García, <i>Los 33 temas del Aprendiz Masón</i>. Las ideas centrales son síntesis para estudio y no sustituyen la lectura completa ni la instrucción en Logia.</p>
     <p>Los temas marcados como <span class="res-mark" style="margin:0">Reservado</span> se presentan aquí solo en su sentido moral. Su contenido ritual se instruye de viva voz, dentro del Templo.</p>
     <p>Tu avance y tus notas se guardan únicamente en este dispositivo; no se envían a ningún servidor. Usa “Descargar respaldo” para conservarlos o llevarlos a otro dispositivo.</p>
-    <p class="note">Versión 2</p>
+    <p class="note">Versión 3</p>
+    <div class="autoria">
+      <div class="k">Del autor a sus Hermanos</div>
+      <p>Queridos Hermanos: preparé este material con afecto fraternal, como una ofrenda al Taller y a quienes hoy comienzan a labrar su piedra. No busco créditos ni reconocimiento. Mi único deseo es que la instrucción que recibimos en Logia pueda acompañarlos también fuera del Templo, al alcance de la mano, cuando más la necesiten.</p>
+      <p>Lo que aquí encontrarán pertenece a la tradición de nuestra Orden y a los autores citados; mía es solo la voluntad de compartirlo.</p>
+      <p class="firma">Con un T∴ A∴ F∴,<br><b>Jesús Antonio Díaz Franco</b>, M∴ M∴<br><span class="muted">Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8</span></p>
+    </div>
   </footer>
 </div>
 
 <section id="impresion" aria-hidden="true"></section>
 
-<dialog id="ficha" aria-labelledby="f-title">
+<dialog id="ficha" aria-labelledby="f-title-wrap">
   <div class="ficha">
     <div class="top">
       <span class="chip" id="f-chip"></span>
       <button class="x" id="f-close" type="button" aria-label="Cerrar ficha">Cerrar</button>
     </div>
-    <h2 id="f-title"></h2>
+    <h2 id="f-title-wrap"><span class="rn-big" id="f-rn"></span><span id="f-title"></span></h2>
     <div><div class="k">Idea central</div><p id="f-idea"></p></div>
     <p class="reserva" id="f-res" hidden>Tema reservado. Aquí solo se presenta su sentido moral; su forma y contenido ritual se aprenden en Logia.</p>
     <p class="libro" id="f-libro"></p>
@@ -351,6 +421,8 @@ function texture(){
   x.putImageData(img,0,0);return c.toDataURL("image/png");
 }
 
+const ROM=n=>{let r="";[[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]].forEach(([v,l])=>{while(n>=v){r+=l;n-=v}});return r};
+const REDUCIDO=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const svg=document.getElementById("stone");
 const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
 const tex=texture();
@@ -365,12 +437,14 @@ const base=el("g",{filter:"url(#sombra)"},svg);
 el("path",{d:silD,fill:"url(#pul)"},base);
 el("path",{d:silD,fill:"url(#tex)",opacity:".18"},svg);
 const words=[["CONÓCETE",92,372],["A TI",522,140],["MISMO",728,200]];
-const txt=el("g",{"font-family":"Cinzel, 'Times New Roman', serif","font-weight":"700","font-size":"62","aria-hidden":"true"},svg);
-words.forEach(([w,x,len])=>{
-  el("text",{x,y:306,textLength:len,lengthAdjust:"spacing",fill:"var(--engrave-hi)"},txt).textContent=w;
-  el("text",{x,y:303,textLength:len,lengthAdjust:"spacing",fill:"var(--engrave)"},txt).textContent=w;
+const GRUPOS=["mazo","regla","cincel"];const PAL={};
+words.forEach(([w,x,len],i)=>{
+  const g=el("g",{class:"grabado","font-family":"'Marcellus SC','Marcellus',serif","font-size":"66","aria-hidden":"true"},svg);
+  el("text",{x,y:307,textLength:len,lengthAdjust:"spacing",fill:"var(--engrave-hi)"},g).textContent=w;
+  el("text",{class:"fg",x,y:304,textLength:len,lengthAdjust:"spacing",fill:"var(--engrave)"},g).textContent=w;
+  PAL[GRUPOS[i]]=g;
 });
-el("text",{x:500,y:360,"text-anchor":"middle","font-family":"Cinzel, serif","font-size":"18","letter-spacing":"6",fill:"var(--engrave)",opacity:".75","aria-hidden":"true"},svg).textContent="NOSCE TE IPSUM";
+el("text",{x:500,y:362,"text-anchor":"middle","font-family":"'Marcellus SC',serif","font-size":"18","letter-spacing":"8",fill:"var(--engrave)",opacity:".7","aria-hidden":"true"},svg).textContent="NOSCE TE IPSUM";
 
 // fragmentos
 const fragG=el("g",{},svg);
@@ -381,14 +455,69 @@ cells.forEach((c,k)=>{
   const g=el("g",{class:"frag",tabindex:"0",role:"button","aria-label":`Tema ${t.n}: ${t.t}`,"data-n":t.n},fragG);
   const shade=.82+hash(c.c[0],c.c[1])*.3;
   el("path",{d,fill:`url(#tex)`,style:`filter:brightness(${shade.toFixed(2)})`},g);
-  el("path",{class:"tint",d,fill:tones[c.g],"fill-opacity":".22",style:"transition:fill-opacity .2s"},g);
+  el("path",{d,fill:tones[c.g],"fill-opacity":".2"},g);
+  el("path",{class:"sombra",d},g);
   el("path",{class:"seam",d},g);
-  el("text",{class:"num",x:c.c[0].toFixed(1),y:c.c[1].toFixed(1)},g).textContent=t.n;
+  el("text",{class:"num",x:c.c[0].toFixed(1),y:c.c[1].toFixed(1)},g).textContent=ROM(t.n);
   g.addEventListener("click",()=>abrir(t.n));
   g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();abrir(t.n)}});
-  FR.set(t.n,{g,cx:c.c[0]});
+  FR.set(t.n,{g,cx:c.c[0],cy:c.c[1]});
   if(isDone(t.n))g.classList.add("cae","fuera");
 });
+
+// resplandor de las letras que se filtra por las grietas
+const blur=el("filter",{id:"halo",x:"-20%",y:"-60%",width:"140%",height:"220%"},defs);el("feGaussianBlur",{stdDeviation:"7"},blur);
+const rg=el("g",{class:"resplandor","font-family":"'Marcellus SC',serif","font-size":"66",filter:"url(#halo)",opacity:".22","aria-hidden":"true"},svg);
+words.forEach(([w,x,len])=>{el("text",{x,y:304,textLength:len,lengthAdjust:"spacing",fill:"#F0CB7A"},rg).textContent=w});
+// luz rasante desde arriba a la izquierda y sombra en el borde opuesto
+const rl=el("radialGradient",{id:"luz",cx:".28",cy:".18",r:".95"},defs);
+el("stop",{offset:"0","stop-color":"#FFE9C2","stop-opacity":".16"},rl);el("stop",{offset:".45","stop-color":"#000","stop-opacity":"0"},rl);el("stop",{offset:"1","stop-color":"#000","stop-opacity":".55"},rl);
+el("path",{d:silD,fill:"url(#luz)","pointer-events":"none"},svg);
+
+// plancha de trazar
+(function(){const tz=document.getElementById("trazado");const z=(n,a,p)=>el(n,a,p||tz);
+  const cx=500,cy=280,R=250;
+  z("circle",{cx,cy,r:R});z("circle",{cx,cy,r:R*.62});
+  z("circle",{cx:cx-R*.5,cy,r:R*.5});z("circle",{cx:cx+R*.5,cy,r:R*.5});
+  z("rect",{x:cx-R*.707,y:cy-R*.707,width:R*1.414,height:R*1.414});
+  const tri=[0,1,2].map(k=>{const a=-Math.PI/2+k*2*Math.PI/3;return(cx+Math.cos(a)*R).toFixed(1)+","+(cy+Math.sin(a)*R).toFixed(1)}).join(" ");z("polygon",{points:tri});
+  z("line",{x1:0,y1:cy,x2:1000,y2:cy});z("line",{x1:cx,y1:0,x2:cx,y2:560});
+  z("line",{x1:cx-R,y1:cy-R,x2:cx+R,y2:cy+R});z("line",{x1:cx+R,y1:cy-R,x2:cx-R,y2:cy+R});
+  z("path",{d:`M${cx-R*1.25} ${cy+R*.9} A ${R*1.4} ${R*1.4} 0 0 1 ${cx+R*1.25} ${cy+R*.9}`});
+  for(let k=0;k<72;k++){const a=k/72*Math.PI*2,r1=R,r2=R+(k%6?6:14);z("line",{x1:cx+Math.cos(a)*r1,y1:cy+Math.sin(a)*r1,x2:cx+Math.cos(a)*r2,y2:cy+Math.sin(a)*r2})}
+  [[0,-12],[-10,6],[10,6]].forEach(([dx,dy])=>z("circle",{class:"pt",cx:cx+dx,cy:cy+dy,r:2.4}));
+})();
+
+// lámpara que sigue al cursor
+const escena=document.getElementById("escena");
+escena.addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;const r=escena.getBoundingClientRect();escena.style.setProperty("--lx",(e.clientX-r.left)+"px");escena.style.setProperty("--ly",(e.clientY-r.top)+"px")});
+
+// polvo al retirar un fragmento
+const cv=document.getElementById("polvo"),cx2=cv.getContext("2d");let parts=[],anim=0;
+function polvo(n){if(REDUCIDO)return;const f=FR.get(n);const r=escena.getBoundingClientRect(),sr=svg.getBoundingClientRect();
+  const dpr=Math.min(2,window.devicePixelRatio||1);cv.width=r.width*dpr;cv.height=r.height*dpr;cx2.setTransform(dpr,0,0,dpr,0,0);
+  const x=sr.left-r.left+f.cx/1000*sr.width,y=sr.top-r.top+f.cy/560*sr.height;
+  for(let i=0;i<46;i++)parts.push({x:x+(Math.random()-.5)*30,y:y+(Math.random()-.5)*20,vx:(Math.random()-.5)*1.6,vy:-Math.random()*1.4,r:Math.random()*1.8+.4,a:1,c:Math.random()<.25?"226,194,126":"200,192,176"});
+  if(!anim)anim=requestAnimationFrame(paso)}
+function paso(){cx2.clearRect(0,0,cv.width,cv.height);parts.forEach(p=>{p.vy+=.045;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.a-=.011;cx2.fillStyle=`rgba(${p.c},${Math.max(0,p.a)})`;cx2.beginPath();cx2.arc(p.x,p.y,p.r,0,6.283);cx2.fill()});
+  parts=parts.filter(p=>p.a>0);anim=parts.length?requestAnimationFrame(paso):0}
+
+// sonido opcional de cincel
+let sonido=false,ac=null;try{sonido=localStorage.getItem("pb-sonido")==="1"}catch(e){}
+function cincel(){if(!sonido)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const t=ac.currentTime;
+  const b=ac.createBuffer(1,ac.sampleRate*.08,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);
+  const src=ac.createBufferSource();src.buffer=b;const hp=ac.createBiquadFilter();hp.type="highpass";hp.frequency.value=1800;const g1=ac.createGain();g1.gain.value=.5;src.connect(hp).connect(g1).connect(ac.destination);src.start(t);
+  [2350,3720].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.setValueAtTime(.12/(i+1),t);g.gain.exponentialRampToValueAtTime(.0001,t+.7);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.75)});
+  const o2=ac.createOscillator(),g2=ac.createGain();o2.type="triangle";o2.frequency.setValueAtTime(140,t+.35);g2.gain.setValueAtTime(.0001,t+.3);g2.gain.exponentialRampToValueAtTime(.25,t+.37);g2.gain.exponentialRampToValueAtTime(.0001,t+.8);o2.connect(g2).connect(ac.destination);o2.start(t+.3);o2.stop(t+.85);
+}catch(e){}}
+const tSon=document.getElementById("t-son");tSon.setAttribute("aria-pressed",String(sonido));
+tSon.addEventListener("click",()=>{sonido=!sonido;tSon.setAttribute("aria-pressed",String(sonido));try{localStorage.setItem("pb-sonido",sonido?"1":"0")}catch(e){}if(sonido)cincel()});
+// Templo iluminado (modo claro) o Cámara (oscuro)
+const tLuz=document.getElementById("t-luz");
+function tema(v){if(v)document.documentElement.setAttribute("data-theme","light");else document.documentElement.removeAttribute("data-theme");tLuz.setAttribute("aria-pressed",String(!!v));
+  document.querySelector('meta[name="theme-color"]').setAttribute("content",v?"#E7E5DF":"#0A0D12")}
+try{tema(localStorage.getItem("pb-luz")==="1")}catch(e){}
+tLuz.addEventListener("click",()=>{const v=tLuz.getAttribute("aria-pressed")!=="true";tema(v);try{localStorage.setItem("pb-luz",v?"1":"0")}catch(e){}});
 
 // ---------- bitácora
 const toolsEl=document.getElementById("tools");
@@ -419,6 +548,12 @@ function render(){
   else if(parts.length){rv.hidden=false;rv.textContent=`Has retirado ${total} de 33 fragmentos. Ya se lee ${parts.map(g=>FRASES[g]).join(" y ")}.`}
   else if(total){rv.hidden=false;rv.textContent=`Has retirado ${total} de 33 fragmentos. Completa una herramienta para que aparezca la primera palabra.`}
   else rv.hidden=true;
+  const sig=T.find(t=>!isDone(t.n));
+  FR.forEach((f,n)=>f.g.classList.toggle("proxima",!!sig&&sig.n===n));
+  if(sig){const fg=FR.get(sig.n).g;if(fg.parentNode.lastChild!==fg&&document.activeElement!==fg)fg.parentNode.appendChild(fg)}
+  T.forEach(t=>{const b=BTN.get(t.n);b.classList.toggle("sig",!!sig&&sig.n===t.n);if(sig&&sig.n===t.n&&!isDone(t.n)&&!S.notes[t.n])b.querySelector(".st").textContent="Siguiente"});
+  GRUPOS.forEach(g=>PAL[g].classList.toggle("encendida",T.filter(t=>t.g===g).every(t=>isDone(t.n))));
+  escena.style.setProperty("--avance",(total/33).toFixed(3));
   revisarRespaldo(total);
 }
 // ---------- recordatorio de respaldo
@@ -444,8 +579,8 @@ const dlg=document.getElementById("ficha");let cur=null;
 const $=id=>document.getElementById(id);
 function abrir(n){
   cur=n;const t=BY.get(n);
-  $("f-chip").textContent=`Tema ${t.n} · ${HERR[t.g].nombre}`;$("f-chip").className="chip t-"+t.g;
-  $("f-title").textContent=t.t;$("f-idea").textContent=t.i;$("f-preg").textContent=t.p;$("f-res").hidden=!t.r;
+  $("f-chip").textContent=HERR[t.g].nombre;$("f-chip").className="chip t-"+t.g;
+  $("f-title").textContent=t.t;$("f-rn").textContent="Tema "+ROM(t.n)+" · "+t.n;$("f-idea").textContent=t.i;$("f-preg").textContent=t.p;$("f-res").hidden=!t.r;
   $("f-libro").innerHTML=`<b>Para profundizar:</b> Tema ${t.n} del libro, páginas ${t.pag}.`;
   $("f-nota").value=S.notes[n]||"";syncToggle();
   const i=T.indexOf(t),pv=T[i-1],nx=T[i+1];
@@ -468,9 +603,9 @@ let tmo;$("f-nota").addEventListener("input",e=>{const v=e.target.value;if(v.tri
 $("f-toggle").addEventListener("click",()=>{
   const n=cur,f=FR.get(n);
   if(isDone(n)){S.done=S.done.filter(x=>x!==n);f.g.classList.remove("fuera");f.g.getBoundingClientRect();f.g.style.transform="";f.g.classList.remove("cae")}
-  else{S.done.push(n);const dir=f.cx<500?-1:1;f.g.style.transform=`translate(${dir*(40+hash(n,3)*60)}px,140px) rotate(${dir*(18+hash(n,9)*30)}deg)`;f.g.classList.add("cae");setTimeout(()=>{if(isDone(n))f.g.classList.add("fuera")},750)}
+  else{S.done.push(n);const dir=f.cx<500?-1:1;f.g.style.transform=`translate(${dir*(40+hash(n,3)*60)}px,140px) rotate(${dir*(18+hash(n,9)*30)}deg)`;f.g.classList.add("cae");setTimeout(()=>polvo(n),380);cincel();setTimeout(()=>{if(isDone(n))f.g.classList.add("fuera")},850)}
   save();render();syncToggle();
-  if(isDone(n))setTimeout(cerrar,350);
+  if(isDone(n))setTimeout(cerrar,250);
 });
 
 // ---------- copiar y reiniciar
