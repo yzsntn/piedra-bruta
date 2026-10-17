@@ -1,6 +1,6 @@
 // La Piedra Bruta del Aprendiz · trabajo sin conexión
 // Al publicar cambios, sube este número (v2.2, v2.3...) para que las apps instaladas se actualicen.
-const VERSION = "piedra-bruta-v5.1";
+const VERSION = "piedra-bruta-v5.2";
 const APP = [
   "./", "index.html", "temas.js", "manifest.webmanifest",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png",

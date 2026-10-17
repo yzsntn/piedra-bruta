@@ -42,7 +42,7 @@
   --noche:#0A1240; --noche-ink:#E9ECF6;
   --cantera:#C4876A; --cantera-ink:#0B0C10;
   --tinta:#0B0C10; --tinta-ink:#F4F4F1; --tinta-muted:#A9ACB4;
-  --mazo:#9C5236; --regla:#1E3FAE; --cincel:#4F6474;
+  --martillo:#9C5236; --regla:#1E3FAE; --mandil:#4F6474;
   --stone-label:#EDE6D6; --stone-seam:#1C1A16; --polish-a:#B9B09E; --polish-b:#7C7465; --engrave:#5E4A22; --engrave-hi:rgba(255,244,220,.55);
   --f-display:"Bodoni Moda","Bodoni 72","Didot",Georgia,serif;
   --f-text:"Jost","Futura","Avenir Next","Segoe UI",sans-serif;
@@ -60,7 +60,7 @@
   --bg:#0B0C10; --surface:#171920; --ink:#EDEDEA; --muted:#A3A6AE;
   --accent:#8EA6FF; --accent-ink:#0B0C10; --accent-press:#B3C3FF;
   --noche:#0E1A5C; --tinta:#1D2029; --tinta-ink:#EDEDEA;
-  --mazo:#DB9475; --regla:#8EA6FF; --cincel:#9BB0C0;
+  --martillo:#DB9475; --regla:#8EA6FF; --mandil:#9BB0C0;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -210,8 +210,8 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 .tool{display:grid;gap:4px;min-width:0}
 .tool h3{font-family:var(--f-display);font-size:var(--step-lead);line-height:1.15;color:var(--ink);display:flex;align-items:baseline;gap:12px}
 .tool h3::before{content:"";flex:none;width:.55em;height:.55em;background:currentColor;transform:translateY(-.05em)}
-.tool h3.t-mazo::before{background:var(--mazo)} .tool h3.t-regla::before{background:var(--regla)} .tool h3.t-cincel::before{background:var(--cincel)}
-.tool h3.t-mazo,.tool h3.t-regla,.tool h3.t-cincel{color:var(--ink)}
+.tool h3.t-martillo::before{background:var(--martillo)} .tool h3.t-regla::before{background:var(--regla)} .tool h3.t-mandil::before{background:var(--mandil)}
+.tool h3.t-martillo,.tool h3.t-regla,.tool h3.t-mandil{color:var(--ink)}
 .tool .sub{font-size:var(--step-small);color:var(--muted);padding-left:calc(.55em + 12px)}
 .tool ul{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:2px}
 .tema-btn{all:unset;box-sizing:border-box;position:relative;width:100%;display:grid;grid-template-columns:2.4em minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:12px 12px;cursor:pointer;font-size:var(--step-body);line-height:1.35;transition:background-color .2s ease}
@@ -226,7 +226,7 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 .tema-btn.hecho .t{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
 .tema-btn.hecho .st,.tema-btn.sig .st{color:var(--accent)}
 .res-mark{font-size:var(--step-small);font-style:italic;color:var(--muted);margin-left:8px;white-space:nowrap}
-.t-mazo{color:var(--mazo)} .t-regla{color:var(--regla)} .t-cincel{color:var(--cincel)}
+.t-martillo{color:var(--martillo)} .t-regla{color:var(--regla)} .t-mandil{color:var(--mandil)}
 
 /* ---------- Ficha: una losa que flota */
 dialog{border:0;border-radius:0;background:var(--bg);color:var(--ink);padding:0;width:min(720px,calc(100vw - 16px));max-height:calc(100dvh - 16px);box-shadow:0 40px 100px -30px rgba(6,10,40,.55)} /* taste-skill-ignore: el diálogo flota */
@@ -240,6 +240,15 @@ dialog[open]{animation:sube .5s var(--ease)}
 .ficha .rn-big{display:block;font-family:var(--f-text);font-size:var(--step-small);font-weight:500;letter-spacing:.01em;color:var(--muted);margin-bottom:12px}
 .ficha .k{font-size:var(--step-small);font-weight:500;color:var(--muted);margin-bottom:6px}
 .reserva{font-size:var(--step-small);background:var(--surface);padding:14px 16px;color:var(--ink)}
+.sentidos{display:grid;gap:14px}
+.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--surface);padding:4px}
+.tab{all:unset;box-sizing:border-box;cursor:pointer;text-align:center;min-height:44px;padding:0 8px;display:flex;align-items:center;justify-content:center;font-size:var(--step-small);font-weight:500;color:var(--muted);transition:background-color .2s ease,color .2s ease}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tabs.solo{grid-template-columns:minmax(0,1fr)}
+.sent{min-height:6.5em}
+.sent:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .pregunta{font-family:var(--f-display);font-style:italic;font-size:var(--step-lead);line-height:1.3}
 textarea{width:100%;min-height:140px;resize:vertical;font:inherit;font-size:var(--step-body);line-height:1.55;color:var(--ink);background:var(--surface);border:1px solid transparent;border-radius:0;padding:14px 16px;transition:border-color .2s ease,background-color .2s ease}
 textarea:focus{outline:none;border-color:var(--accent);background:var(--bg)}
@@ -431,10 +440,10 @@ label.k{display:block}
 
   <section class="sec intro" aria-labelledby="h-intro">
     <h2 class="sr" id="h-intro">Sobre este cuaderno</h2>
-    <p class="lead" data-rev>Este cuaderno acompaña la instrucción del Primer Grado: los 33 temas del Aprendiz, repartidos entre el mazo, la regla y el cincel, para trabajarlos a tu paso.</p>
+    <p class="lead" data-rev>Este cuaderno acompaña la instrucción del Primer Grado: los 33 temas del Aprendiz, repartidos entre el martillo, la regla y el mandil, para trabajarlos a tu paso.</p>
     <div class="cuatro">
       <p data-rev style="--d:1"><b>Para quién.</b> Para los Aprendices de la Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8, de la Gran Logia “Cosmos” del Estado de Chihuahua, y para los Maestros que los acompañan en su instrucción.</p>
-      <p data-rev style="--d:2"><b>Qué contiene.</b> Cada tema trae su idea central, las páginas del libro donde se estudia y una pregunta para meditar. Los temas reservados se presentan solo en su sentido moral.</p>
+      <p data-rev style="--d:2"><b>Qué contiene.</b> Cada tema trae su idea central en tres sentidos, filosófico, moral y esotérico, las páginas del libro donde se estudia y una pregunta para meditar. Los temas reservados se presentan solo en su sentido moral.</p>
       <p data-rev style="--d:3"><b>Dónde vive.</b> Tu avance y tus notas se guardan únicamente en este dispositivo; no se envían a ningún servidor. Un archivo de respaldo los conserva o los lleva a otro teléfono.</p>
       <p data-rev style="--d:4"><b>Cómo leerlo.</b> El fragmento que brilla en la piedra es el siguiente en el orden sugerido. Ninguna síntesis sustituye la lectura completa del libro ni la palabra del Taller.</p>
     </div>
@@ -446,7 +455,7 @@ label.k{display:block}
     </figure>
     <div class="mz-b">
       <blockquote data-rev>No se le agrega nada a la piedra: solo se le quita lo que sobra.</blockquote>
-      <p data-rev style="--d:1">Así trabaja el Aprendiz. El mandil protege al obrero; el mazo, la regla y el cincel hacen lo demás.</p>
+      <p data-rev style="--d:1">Así trabaja el Aprendiz. El mandil protege al obrero; el martillo y la regla hacen lo demás.</p>
     </div>
     <div class="mz-d">
       <p class="griego" data-rev lang="grc">Γνῶθι σεαυτόν</p>
@@ -535,7 +544,15 @@ label.k{display:block}
     </div>
     <h2 id="f-title-wrap"><span class="rn-big" id="f-rn"></span><span id="f-title"></span></h2>
     <div><div class="k">Idea central</div><p id="f-idea"></p></div>
-    <p class="reserva" id="f-res" hidden>Tema reservado. Aquí solo se presenta su sentido moral; su forma y contenido ritual se aprenden en Logia.</p>
+    <div class="sentidos">
+      <div class="tabs" role="tablist" aria-label="Sentidos del tema">
+        <button class="tab" role="tab" type="button" id="tab-f" data-k="f" aria-controls="f-sent" aria-selected="true">Filosófico</button>
+        <button class="tab" role="tab" type="button" id="tab-m" data-k="m" aria-controls="f-sent" aria-selected="false">Moral</button>
+        <button class="tab" role="tab" type="button" id="tab-e" data-k="e" aria-controls="f-sent" aria-selected="false">Esotérico</button>
+      </div>
+      <p class="sent" id="f-sent" role="tabpanel" aria-labelledby="tab-f" tabindex="0"></p>
+    </div>
+    <p class="reserva" id="f-res" hidden>Tema reservado. Aquí solo se presenta su sentido moral; sus sentidos filosófico y esotérico, su forma y su contenido ritual se instruyen en Logia.</p>
     <p class="libro" id="f-libro"></p>
     <div><div class="k">Para meditar</div><p class="pregunta" id="f-preg"></p></div>
     <div><label class="k" for="f-nota">Lo que hoy quité de mí</label><textarea id="f-nota" placeholder="Escribe con tus propias palabras…"></textarea></div>
@@ -555,6 +572,9 @@ label.k{display:block}
 <script>
 (function(){
 const {HERR,T}=window.PIEDRA;
+// compatibilidad: si el navegador aún guarda el temas.js anterior (mazo/cincel), se traduce a martillo/mandil
+if(HERR.mazo&&!HERR.martillo){const H={martillo:HERR.mazo,regla:HERR.regla,mandil:HERR.cincel};for(const k in HERR)delete HERR[k];Object.assign(HERR,H)}
+T.forEach(t=>{if(t.g==="mazo")t.g="martillo";else if(t.g==="cincel")t.g="mandil"});
 const BY=new Map(T.map(x=>[x.n,x]));
 
 // ---------- estado (solo en este dispositivo)
@@ -579,7 +599,7 @@ function inPoly(p,poly){let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=
 function centroid(poly){let A=0,x=0,y=0;for(let i=0;i<poly.length;i++){const p=poly[i],q=poly[(i+1)%poly.length];const cr=p[0]*q[1]-q[0]*p[1];A+=cr;x+=(p[0]+q[0])*cr;y+=(p[1]+q[1])*cr}A/=2;return A?[x/(6*A),y/(6*A)]:poly[0]}
 function voronoi(region,seeds){return seeds.map((s,i)=>{let poly=region.slice();seeds.forEach((q,j)=>{if(i===j||!poly.length)return;const a=q[0]-s[0],b=q[1]-s[1];poly=clipHalf(poly,a,b,(q[0]*q[0]+q[1]*q[1]-s[0]*s[0]-s[1]*s[1])/2)});return poly})}
 // tres bandas: cada herramienta descubre una parte de la frase
-const BANDS=[["mazo",0,472],["regla",472,686],["cincel",686,1000]];
+const BANDS=[["martillo",0,472],["regla",472,686],["mandil",686,1000]];
 const cells=[];
 BANDS.forEach(([g,x0,x1])=>{
   let region=clipHalf(clipHalf(sil,-1,0,-x0),1,0,x1);
@@ -632,7 +652,7 @@ const base=el("g",{filter:"url(#sombra)"},svg);
 el("path",{d:silD,fill:"url(#pul)"},base);
 el("path",{d:silD,fill:"url(#tex)",opacity:".18"},svg);
 const words=[["CONÓCETE",92,372],["A TI",522,140],["MISMO",728,200]];
-const GRUPOS=["mazo","regla","cincel"];const PAL={};
+const GRUPOS=["martillo","regla","mandil"];const PAL={};
 words.forEach(([w,x,len],i)=>{
   const g=el("g",{class:"grabado","font-family":"'Bodoni Moda',Didot,serif","font-size":"70","font-weight":"500","aria-hidden":"true"},svg);
   el("text",{x,y:307,textLength:len,lengthAdjust:"spacing",fill:"var(--engrave-hi)"},g).textContent=w;
@@ -644,7 +664,7 @@ el("text",{x:500,y:362,"text-anchor":"middle","font-family":"'Bodoni Moda',Didot
 // fragmentos
 const fragG=el("g",{},svg);
 const FR=new Map();
-const tones={mazo:"#6E5440",regla:"#6F6650",cincel:"#4F5D60"};
+const tones={martillo:"#6E5440",regla:"#6F6650",mandil:"#4F5D60"};
 cells.forEach((c,k)=>{
   const t=c.tema;const d=roughPath(c.p);
   const g=el("g",{class:"frag",tabindex:"0",role:"button","aria-label":`Tema ${t.n}: ${t.t}`,"data-n":t.n},fragG);
@@ -735,7 +755,7 @@ Object.entries(HERR).forEach(([g,h])=>{
 });
 const progEl=document.getElementById("progress");
 Object.entries(HERR).forEach(([g,h])=>{const d=document.createElement("div");d.className="prog";d.innerHTML=`<div class="lbl"><span class="t-${g}">${h.nombre.replace(" de 24 pulgadas","")}</span><span id="pc-${g}"></span></div><div class="bar"><i class="b-${g}" id="pb-${g}"></i></div>`;progEl.appendChild(d)});
-const FRASES={mazo:"“Conócete”",regla:"“a ti”",cincel:"“mismo”"};
+const FRASES={martillo:"“Conócete”",regla:"“a ti”",mandil:"“mismo”"};
 function render(){
   T.forEach(t=>{const b=BTN.get(t.n);const done=isDone(t.n);b.classList.toggle("hecho",done);
     b.querySelector(".st").textContent=done?"Retirado":(S.notes[t.n]?"En trabajo":"");
@@ -783,6 +803,7 @@ function abrir(n){
   cur=n;const t=BY.get(n);
   $("f-chip").textContent=HERR[t.g].nombre;$("f-chip").className="chip t-"+t.g;
   $("f-title").textContent=t.t;$("f-rn").textContent="Tema "+ROM(t.n)+" · "+t.n;$("f-idea").textContent=t.i;$("f-preg").textContent=t.p;$("f-res").hidden=!t.r;
+  sentidos(t);
   $("f-libro").innerHTML=`<b>Para profundizar:</b> Tema ${t.n} del libro, páginas ${t.pag}.`;
   $("f-nota").value=S.notes[n]||"";syncToggle();
   const i=T.indexOf(t),pv=T[i-1],nx=T[i+1];
@@ -793,6 +814,15 @@ function abrir(n){
   dlg.scrollTop=0;
   if(typeof dlg.showModal==="function"){if(!dlg.open)dlg.showModal()}else dlg.setAttribute("open","");
 }
+// sentidos filosófico, moral y esotérico (los reservados solo muestran el moral)
+let sentidoActual="f";
+const TABS=["f","m","e"].map(k=>$("tab-"+k));
+function mostrarSentido(k){const t=BY.get(cur);if(!t)return;if(t.r)k="m";sentidoActual=t.r?sentidoActual:k;
+  TABS.forEach(b=>{const on=b.dataset.k===k;b.setAttribute("aria-selected",String(on));b.tabIndex=on?0:-1});
+  $("f-sent").textContent=t[k]||"";$("f-sent").setAttribute("aria-labelledby","tab-"+k)}
+function sentidos(t){TABS.forEach(b=>b.hidden=!!t.r&&b.dataset.k!=="m");TABS[0].parentNode.classList.toggle("solo",!!t.r);mostrarSentido(t.r?"m":sentidoActual)}
+TABS.forEach((b,i)=>{b.addEventListener("click",()=>mostrarSentido(b.dataset.k));
+  b.addEventListener("keydown",e=>{if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;e.preventDefault();const vis=TABS.filter(x=>!x.hidden);const j=(vis.indexOf(b)+(e.key==="ArrowRight"?1:-1)+vis.length)%vis.length;vis[j].focus();mostrarSentido(vis[j].dataset.k)})});
 function syncToggle(){const d=isDone(cur);$("f-toggle").textContent=d?"Volver a colocar el fragmento":"Retirar el fragmento";
   $("f-hint").textContent=d?"Este tema ya fue trabajado.":"Hazlo cuando el tema esté estudiado."}
 function cerrar(){if(dlg.open){dlg.close?dlg.close():dlg.removeAttribute("open")}}
