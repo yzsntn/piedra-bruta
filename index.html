@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Piedra Bruta del Aprendiz</title>
+<meta name="description" content="Instrucción del Primer Grado: los 33 temas del Aprendiz trabajados como una piedra bruta que se desbasta.">
+<meta name="theme-color" content="#E8EBE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13171B" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Piedra Bruta">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Alegreya:ital,wght@0,400;0,500;1,400&family=Alegreya+Sans:wght@500;700&display=swap">
+<style>
+/* Layout: una sola columna de lectura; la piedra como pieza central a lo ancho, la bitácora en tres columnas (una por herramienta) que se apilan en móvil. */
+:root{
+  --bg:#E8EBE9; --surface:#F5F6F4; --ink:#1C2227; --muted:#59646C; --line:#C7CEcB;
+  --accent:#24418C; --accent-ink:#FFFFFF;
+  --mazo:#8A4A2E; --regla:#7E6116; --cincel:#2E5C6A;
+  --stone-seam:#3B3933; --stone-label:#F3EFE6; --polish-a:#DCD6C9; --polish-b:#B7AF9F; --engrave:#4A443A; --engrave-hi:#F1ECE2;
+  --f-display:"Cinzel","Trajan Pro","Times New Roman",serif;
+  --f-body:"Alegreya",Georgia,"Times New Roman",serif;
+  --f-label:"Alegreya Sans","Gill Sans","Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#13171B; --surface:#1B2126; --ink:#E5E8E6; --muted:#9BA6AE; --line:#2E373E;
+  --accent:#93AAF0; --accent-ink:#0F1520; --mazo:#D48C6A; --regla:#D6B25C; --cincel:#80B4C2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#13171B; --surface:#1B2126; --ink:#E5E8E6; --muted:#9BA6AE; --line:#2E373E;
+  --accent:#93AAF0; --accent-ink:#0F1520; --mazo:#D48C6A; --regla:#D6B25C; --cincel:#80B4C2; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1000px;margin:0 auto;display:grid;gap:44px}
+header{padding-top:44px;display:grid;gap:12px;max-width:760px}
+.eyebrow{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(34px,6vw,58px);line-height:1.05;margin:0;letter-spacing:.02em;text-wrap:balance}
+h2{font-family:var(--f-display);font-weight:500;font-size:clamp(22px,3vw,28px);margin:0;letter-spacing:.02em;text-wrap:balance}
+p{margin:0}
+.lede{font-size:20px;color:var(--ink);max-width:62ch}
+.muted{color:var(--muted)}
+
+/* Piedra */
+.stone-card{display:grid;gap:16px}
+.stone-frame{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:clamp(8px,2vw,20px)}
+#stone{width:100%;height:auto;display:block;max-width:100%}
+.frag{cursor:pointer;outline:none}
+.frag .seam{fill:none;stroke:var(--stone-seam);stroke-width:2;stroke-linejoin:round}
+.frag:hover .tint,.frag:focus-visible .tint{fill-opacity:.0}
+.frag:focus-visible .seam{stroke:var(--accent);stroke-width:5}
+.frag .num{font-family:var(--f-display);font-weight:700;font-size:20px;fill:var(--stone-label);paint-order:stroke;stroke:rgba(0,0,0,.45);stroke-width:3px;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+.frag{transform-box:fill-box;transform-origin:center;transition:transform .7s cubic-bezier(.5,0,.75,0),opacity .7s ease-in}
+.frag.cae{opacity:0;pointer-events:none}
+.frag.fuera{display:none}
+@media (prefers-reduced-motion: reduce){.frag{transition:opacity .2s linear}.frag.cae{transform:none!important}}
+
+.progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.prog{display:grid;gap:6px;min-width:0}
+.prog .lbl{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;gap:8px}
+.prog .lbl span:last-child{font-variant-numeric:tabular-nums;color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;transition:width .5s ease}
+.t-mazo{color:var(--mazo)} .t-regla{color:var(--regla)} .t-cincel{color:var(--cincel)}
+.b-mazo{background:var(--mazo)} .b-regla{background:var(--regla)} .b-cincel{background:var(--cincel)}
+.revelada{font-size:19px;border-left:3px solid var(--accent);padding-left:14px}
+
+/* Cómo trabajar */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:s;padding:0;margin:0;list-style:none}
+.steps li{display:grid;gap:4px;min-width:0;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--f-display);font-weight:700;font-size:28px;color:var(--accent);line-height:1}
+.steps b{font-family:var(--f-label);font-size:16px}
+.steps p{font-size:16.5px;color:var(--muted)}
+
+/* Bitácora */
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 24px}
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.tool{display:grid;gap:10px;align-content:start;min-width:0}
+.tool h3{font-family:var(--f-display);font-size:20px;margin:0;font-weight:700}
+.tool .sub{font-family:var(--f-label);font-size:14px;color:var(--muted);letter-spacing:.02em}
+.tool ul{list-style:none;margin:4px 0 0;padding:0;display:grid;border-top:1px solid var(--line)}
+.tool li{border-bottom:1px solid var(--line)}
+.tema-btn{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:2.2em minmax(0,1fr) auto;gap:8px;align-items:baseline;padding:9px 4px;cursor:pointer;font-size:16.5px;line-height:1.3}
+.tema-btn:hover{background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.tema-btn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.tema-btn .n{font-family:var(--f-display);font-weight:700;font-variant-numeric:tabular-nums}
+.tema-btn .st{font-family:var(--f-label);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.tema-btn.hecho .t{color:var(--muted)}
+.tema-btn.hecho .st{color:var(--accent)}
+.res-mark{font-family:var(--f-label);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:3px;padding:0 4px;margin-left:6px;color:var(--muted);vertical-align:2px}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{font-family:var(--f-label);font-weight:700;font-size:15px;letter-spacing:.02em;border-radius:4px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn:hover{border-color:var(--muted)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.quiet{background:transparent}
+.install{display:grid;gap:12px;border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--surface);border-radius:6px;padding:14px 16px}
+.autoria{display:grid;gap:6px;padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--line);color:var(--ink);max-width:70ch}
+.autoria .k{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.note{font-family:var(--f-label);font-size:14px;color:var(--muted)}
+
+/* Ficha */
+dialog{border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);padding:0;width:min(640px,calc(100vw - 32px));max-height:calc(100dvh - 32px)}
+dialog::backdrop{background:rgba(10,12,14,.55)}
+.ficha{display:grid;gap:16px;padding:24px clamp(18px,4vw,32px) 24px}
+.ficha .top{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.chip{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.ficha h2{font-size:clamp(22px,4vw,30px)}
+.ficha .k{font-family:var(--f-label);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.reserva{font-size:16px;border:1px dashed var(--line);border-radius:4px;padding:10px 12px;color:var(--muted)}
+.pregunta{font-style:italic;font-size:19px}
+textarea{width:100%;min-height:120px;resize:vertical;font:inherit;font-size:17px;line-height:1.5;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:10px 12px}
+textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+label.k{display:block}
+.x{all:unset;cursor:pointer;font-family:var(--f-label);font-size:14px;font-weight:700;color:var(--muted);padding:4px 6px;border-radius:3px}
+.x:focus-visible{outline:2px solid var(--accent)}
+
+footer{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:6px;font-size:15.5px;color:var(--muted)}
+
+@media (max-width:820px){
+  .tools{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:460px){
+  body{font-size:17px}
+  .frag .num{font-size:36px;stroke-width:5px}
+  .stone-frame{padding:4px}
+  .progress{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Instrucción del Primer Grado · R∴ E∴ A∴ A∴</div>
+    <h1>La Piedra Bruta del Aprendiz</h1>
+    <p class="lede">Treinta y tres temas, treinta y tres fragmentos. Cada tema que estudias retira una aspereza de la piedra. Cuando hayas trabajado los 33, quedará a la vista lo que la piedra siempre llevó dentro.</p>
+    <p class="muted">Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8 · Gran Logia “Cosmos” del Estado de Chihuahua</p>
+  </header>
+
+  <div class="install" id="install" hidden>
+    <p><b>Instala la Piedra Bruta en tu teléfono.</b> <span id="install-txt">Queda como app en tu pantalla de inicio y funciona sin internet.</span></p>
+    <div class="actions"><button class="btn primary" id="install-btn" type="button" hidden>Instalar app</button><button class="btn quiet" id="install-no" type="button">Ahora no</button></div>
+  </div>
+
+  <section class="stone-card" aria-labelledby="h-piedra">
+    <h2 id="h-piedra" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">La piedra</h2>
+    <div class="stone-frame">
+      <svg id="stone" viewBox="0 0 1000 560" role="group" aria-label="Piedra bruta de 33 fragmentos. Cada fragmento abre la ficha de un tema."></svg>
+    </div>
+    <div class="progress" id="progress"></div>
+    <p class="revelada" id="revelada" hidden></p>
+  </section>
+
+  <section aria-labelledby="h-como" style="display:grid;gap:18px">
+    <h2 id="h-como">Cómo trabajar la piedra</h2>
+    <ol class="steps">
+      <li><b>Elige un fragmento</b><p>Toca un número en la piedra o un tema de la bitácora. El orden sugerido va del mazo al cincel.</p></li>
+      <li><b>Estudia el tema</b><p>Lee la idea central, consulta el libro de los 33 temas y llévalo a la instrucción en Logia.</p></li>
+      <li><b>Escribe en tu bitácora</b><p>Responde la pregunta y anota lo que hoy quitaste de ti. Tus notas se guardan solo en este dispositivo; descarga un respaldo de vez en cuando.</p></li>
+      <li><b>Retira el fragmento</b><p>Cuando el tema esté trabajado, retira su fragmento. Poco a poco aparecerá la frase oculta.</p></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-bitacora" style="display:grid;gap:22px">
+    <div class="sec-head">
+      <div style="display:grid;gap:6px">
+        <h2 id="h-bitacora">Bitácora del cantero</h2>
+        <p class="muted" style="max-width:62ch">Los 33 temas repartidos entre las tres herramientas del Aprendiz, once por cada una.</p>
+      </div>
+      <div class="actions">
+        <button class="btn" id="export" type="button">Descargar respaldo</button>
+        <button class="btn" id="import" type="button">Cargar respaldo</button>
+        <button class="btn" id="copy" type="button">Copiar mi bitácora</button>
+        <button class="btn quiet" id="reset" type="button">Reiniciar la piedra</button>
+        <input type="file" id="import-file" accept=".json,application/json" hidden>
+      </div>
+    </div>
+    <div class="actions" id="import-confirm" hidden>
+      <span class="note" id="import-info"></span>
+      <button class="btn primary" id="import-yes" type="button">Reemplazar con el respaldo</button>
+      <button class="btn quiet" id="import-no" type="button">Cancelar</button>
+    </div>
+    <div class="actions" id="reset-confirm" hidden>
+      <span class="note">Se volverán a colocar los 33 fragmentos y se borrarán tus notas de este dispositivo.</span>
+      <button class="btn primary" id="reset-yes" type="button">Reiniciar y borrar notas</button>
+      <button class="btn quiet" id="reset-no" type="button">Conservar mi avance</button>
+    </div>
+    <p class="note" id="copy-msg" role="status" hidden></p>
+    <textarea id="copy-fallback" aria-label="Texto de tu bitácora" hidden readonly></textarea>
+    <div class="tools" id="tools"></div>
+  </section>
+
+  <footer>
+    <div class="autoria">
+      <div class="k">Declaración de autoría</div>
+      <p>Este material fue preparado por <b>Jesús Antonio Díaz Franco</b>, M∴ M∴, de la Resp∴ Log∴ Simb∴ Lázaro Cárdenas No. 8. No busca créditos ni reconocimiento personal. Es una manera de extender al medio digital el conocimiento que se comparte en Logia y de facilitar que llegue a cada Aprendiz. La doctrina pertenece a la tradición de la Orden y a los autores citados.</p>
+    </div>
+    <p>Fuente: Adolfo Terrones Benítez y Alfonso León García, <i>Los 33 temas del Aprendiz Masón</i>. Las ideas centrales son síntesis para estudio y no sustituyen la lectura completa ni la instrucción en Logia.</p>
+    <p>Los temas marcados como <span class="res-mark" style="margin:0">Reservado</span> se presentan aquí solo en su sentido moral. Su contenido ritual se instruye de viva voz, dentro del Templo.</p>
+    <p>Tu avance y tus notas se guardan únicamente en este dispositivo; no se envían a ningún servidor. Usa “Descargar respaldo” para conservarlos o llevarlos a otro dispositivo.</p>
+    <p class="note">Versión 2</p>
+  </footer>
+</div>
+
+<dialog id="ficha" aria-labelledby="f-title">
+  <div class="ficha">
+    <div class="top">
+      <span class="chip" id="f-chip"></span>
+      <button class="x" id="f-close" type="button" aria-label="Cerrar ficha">Cerrar</button>
+    </div>
+    <h2 id="f-title"></h2>
+    <div><div class="k">Idea central</div><p id="f-idea"></p></div>
+    <p class="reserva" id="f-res" hidden>Tema reservado. Aquí solo se presenta su sentido moral; su forma y contenido ritual se aprenden en Logia.</p>
+    <div><div class="k">Para meditar</div><p class="pregunta" id="f-preg"></p></div>
+    <div><label class="k" for="f-nota">Lo que hoy quité de mí</label><textarea id="f-nota" placeholder="Escribe con tus propias palabras…"></textarea></div>
+    <div class="actions">
+      <button class="btn primary" id="f-toggle" type="button"></button>
+      <span class="note" id="f-hint"></span>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+const HERR={
+  mazo:{nombre:"El mazo",sub:"La voluntad que inicia el trabajo"},
+  regla:{nombre:"La regla de 24 pulgadas",sub:"Medida y orden"},
+  cincel:{nombre:"El cincel",sub:"El discernimiento que afina"}
+};
+const T=[
+// ---- EL MAZO
+{n:1,g:"mazo",t:"La Cámara de Preparación",i:"Antes de recibir la Luz, el aspirante queda a solas consigo mismo en un recinto de reflexión. Sus emblemas recuerdan la brevedad de la vida y la necesidad de morir a los vicios para renacer a una vida nueva. Es la primera mirada honesta hacia el interior.",p:"¿Qué parte de mi vida anterior debía quedarse en aquella cámara?"},
+{n:2,g:"mazo",t:"El Triangular",i:"La plancha triangular pregunta al aspirante por sus deberes para con el Ser Supremo, para con sus semejantes y para consigo mismo. El triángulo equilátero, primera figura geométrica cerrada, expresa el equilibrio entre esos tres deberes. Sus respuestas vuelven a estudiarse en los temas 21, 22 y 23.",p:"Si hoy respondiera de nuevo las tres preguntas, ¿qué respondería distinto?"},
+{n:16,g:"mazo",t:"Los Viajes del Aprendiz",i:"Los viajes simbólicos representan el tránsito de la vida humana y la purificación por los elementos: el agua que fecunda, el aire que vivifica y el fuego que purifica. Cada tramo es más sereno que el anterior, como el paso del desorden de las pasiones al dominio de uno mismo.",p:"¿Qué prueba de mi vida me ha purificado más, y qué dejó en mí?"},
+{n:30,g:"mazo",t:"Los Templos Iniciáticos de la Antigüedad",i:"Los pueblos antiguos guardaron su sabiduría en templos de misterios, a los que solo se accedía después de pruebas severas. La Masonería conserva esa tradición con pruebas morales y físicas simbólicas. Su lección: nadie sabe educar si antes no ha recibido educación, ni sabrá mandar si antes no aprendió a obedecer.",p:"¿En qué aspecto de mi vida todavía me toca aprender a obedecer antes de mandar?"},
+{n:14,g:"mazo",t:"El Juramento",r:1,i:"El juramento es una obligación contraída por voluntad propia, que pone a prueba la decisión, el carácter y la energía del hombre. Se presta ante el Ara y compromete el honor del iniciado de por vida. Su enseñanza pública es sencilla: la palabra dada vale lo que vale quien la da.",p:"¿Cumplo mi palabra aun cuando nadie me la recuerda?"},
+{n:13,g:"mazo",t:"El Mandil",i:"Prenda de piel blanca que protege simbólicamente al obrero durante su labor. Representa la pureza de intención y la dignidad del trabajo, material o intelectual. Quien lo porta declara que no se avergüenza de labrar su propia piedra.",p:"¿Qué mancha procuro que no llegue nunca a mi mandil?"},
+{n:15,g:"mazo",t:"Los Saludos, los Tocamientos y las Baterías",r:1,i:"El saludo es una muestra de afecto, respeto y fraternidad. La Masonería adoptó estas demostraciones como lenguaje de unión entre hermanos. Fuera del Templo queda su sentido moral: todo trato entre hermanos ha de ser afectuoso, respetuoso y leal.",p:"¿Mi trato diario con los demás refleja el respeto que expreso en Logia?"},
+{n:17,g:"mazo",t:"La Palabra Sagrada del Aprendiz",r:1,i:"Es un medio discreto de reconocimiento entre Aprendices de cualquier raza, nación o idioma, y nunca se escribe ni se pronuncia fuera del Templo. Su sentido alegórico apunta a la voluntad firme con la que el hombre modela su propia materia para ser útil a sí mismo, servir a sus semejantes y venerar al Ser Supremo.",p:"¿Dónde necesita hoy más firmeza mi voluntad?"},
+{n:18,g:"mazo",t:"La Marcha del Aprendiz",r:1,i:"Todo avance en la vida debe hacerse con orden, firmeza y seguridad, sin detenerse ni desviarse. La marcha del Aprendiz enseña a avanzar hacia la Luz con paso recto. El libro concluye que la marcha se cumple de verdad cuando se enseña al que no sabe.",p:"¿Qué paso concreto daré este mes para avanzar con orden?"},
+{n:19,g:"mazo",t:"La Edad del Aprendiz",i:"La edad masónica no mide los años vividos, sino el adelanto en el trabajo y el grado alcanzado. Remite a los tres periodos de toda existencia: nacimiento, vida y muerte. El Aprendiz es, simbólicamente, alguien que acaba de nacer a la Luz.",p:"Si mi edad se midiera por lo que he aprendido, ¿cuántos años tendría?"},
+{n:20,g:"mazo",t:"Los Toques",r:1,i:"Los toques forman parte del lenguaje de reconocimiento que se practica con discreción. Su enseñanza filosófica es que en el Taller nada es ocioso: cada signo, herramienta y objeto contiene una lección. Por eso al Templo jamás se va a perder el tiempo.",p:"¿Qué detalle de la Logia he mirado sin preguntarme todavía qué enseña?"},
+// ---- LA REGLA
+{n:3,g:"regla",t:"El Templo",i:"La Logia representa el universo: su largo va de Oriente a Occidente, su ancho de Norte a Sur y su altura de la tierra al cielo. Es el espacio ordenado donde se trabaja la piedra. La palabra Logia recuerda el lugar de reunión y de trabajo de los antiguos constructores.",p:"¿Qué orden necesita el templo interior que estoy construyendo?"},
+{n:4,g:"regla",t:"La Columna B",i:"Junto a ella trabajan los Aprendices y a su pie se coloca la piedra bruta. Representa las fuerzas que sostienen al universo en movimiento armónico y en constante evolución. Su enseñanza se completa con la otra columna, en los grados siguientes.",p:"¿Qué me sostiene cuando mi trabajo se vuelve difícil?"},
+{n:5,g:"regla",t:"Las Doce Columnas",i:"Rodean el Templo y representan las ciencias que se cultivan en el seno de la Masonería y el ciclo completo del año. Recuerdan que la inteligencia humana puede crecer sin límite y que la Sabiduría, la Fuerza y la Belleza sostienen toda obra.",p:"¿Qué ciencia o conocimiento me propongo cultivar este año?"},
+{n:6,g:"regla",t:"El Ara",i:"Es el altar de los juramentos. Sobre ella descansan el Libro de la Ley, la Escuadra y el Compás. Recuerda que el compromiso masónico se contrae ante lo más alto que cada hombre reconoce en su conciencia.",p:"¿Ante qué principios rindo cuentas cuando nadie me ve?"},
+{n:11,g:"regla",t:"Los Tronos",i:"El Venerable Maestro preside en Oriente y los dos Vigilantes dirigen las columnas. Las tres dignidades evocan el curso del sol, del nacimiento a la plenitud y al ocaso, y personifican la Sabiduría, la Fuerza y la Belleza.",p:"¿Qué puedo aprender del servicio de quienes hoy dirigen el Taller?"},
+{n:10,g:"regla",t:"Las Luces",i:"En sentido simbólico la Luz es la Ciencia, la Verdad y la Razón. Recibir la Luz es empezar a ver con entendimiento. Las Grandes Luces de la Logia son el Libro de la Ley, la Escuadra y el Compás; las demás se irán conociendo al subir de grado.",p:"¿Qué verdad he empezado a ver desde que recibí la Luz?"},
+{n:33,g:"regla",t:"La Biblia",i:"Es el Libro de la Ley que, abierto sobre el Ara junto con la Escuadra y el Compás, forma las Tres Grandes Luces. El libro explica que se adopta por ser el texto sagrado predominante en nuestro país y que sin él los trabajos no se consideran regulares. Representa la ley moral a la que cada hermano se obliga según su propia fe.",p:"¿Qué lugar ocupa en mi vida la ley moral que acepté al iniciarme?"},
+{n:8,g:"regla",t:"La Escuadra",i:"Instrumento que verifica el ángulo recto. Simboliza la rectitud de los actos y la justicia, y es la joya del Venerable Maestro. Enseña a ajustar la conducta a la ley moral.",p:"¿Qué acto reciente no pasaría la prueba de la escuadra?"},
+{n:9,g:"regla",t:"El Compás",i:"Traza círculos alrededor de un punto fijo: enseña a medir y limitar los deseos y a mantenerse en el justo límite frente a los demás. Al cerrar los trabajos queda plegado junto al Libro cerrado y la Escuadra, en reposo.",p:"¿Qué deseo necesito mantener dentro de su justo límite?"},
+{n:12,g:"regla",t:"Las Herramientas del Aprendiz",i:"El mazo y la regla de 24 pulgadas son las herramientas propias del Aprendiz, junto con el cincel. El mazo es la voluntad que golpea; el cincel, el discernimiento que dirige el golpe; la regla, las 24 horas del día bien repartidas entre trabajo, descanso y servicio.",p:"¿Cómo repartí ayer mis 24 horas?"},
+{n:7,g:"regla",t:"La Educación Masónica",i:"La Masonería enseña con emblemas, alegorías y símbolos: figuras que no imponen una verdad, sino que invitan a cada uno a descubrirla. Todo masón tiene derecho a recibir instrucción y el deber de investigar por sí mismo, para luego enseñar a otros.",p:"¿Qué símbolo me intriga hoy y cómo voy a investigarlo?"},
+// ---- EL CINCEL
+{n:24,g:"cincel",t:"Qué es la Masonería",i:"Una institución fundada en la ley natural y en los Antiguos Límites, que busca el perfeccionamiento moral del hombre y el progreso de la humanidad. Sus bases son la creencia en un Ser Supremo, el amor a la humanidad y el respeto a la libertad de pensamiento.",p:"¿Cómo le explicaría a un amigo, en tres frases, qué es la Masonería?"},
+{n:25,g:"cincel",t:"Qué es el Masón",i:"La palabra se asocia al constructor que golpea y labra la piedra. El masón es un hombre libre y de buenas costumbres, que conoce sus deberes y las responsabilidades que contrajo ante el Ara en beneficio de la humanidad.",p:"¿Qué tendría que ver en mí alguien que no sabe que soy masón?"},
+{n:26,g:"cincel",t:"Conceptos del Vicio",i:"El vicio es el hábito que pervierte la voluntad y degrada al hombre y a la sociedad. Conocerlo con detalle es el primer paso para huir de él y para la regeneración moral. Cada fragmento que se retira de esta piedra es un vicio vencido.",p:"¿Cuál es la aspereza que más me cuesta quitar?"},
+{n:27,g:"cincel",t:"Conceptos de la Virtud",i:"La virtud es la disposición constante a obrar el bien. Es requisito para ser admitido y una perfección que se cultiva toda la vida. Su práctica es difícil sin firmeza moral, buenas costumbres y una educación esmerada.",p:"¿Qué virtud quiero que se note más en mí dentro de un año?"},
+{n:28,g:"cincel",t:"Conceptos de la Moral",i:"La moral reúne las normas de conducta que nacen de los usos y costumbres de los pueblos y dan origen a sus leyes. Hay una moral íntima y una moral social; el masón procura que ambas coincidan y que su conducta en familia sea la misma que en público.",p:"¿Soy el mismo en mi casa que en la Logia y en mi trabajo?"},
+{n:21,g:"cincel",t:"El Masón ante la Divinidad",i:"Responde a la primera pregunta de la plancha triangular. La Masonería requiere la creencia en un Ser Supremo y, al mismo tiempo, respeta la fe de cada quien. No impone dogma: reúne a hombres de distintas creencias en un mismo ideal de fraternidad universal.",p:"¿Cómo vivo mi deber para con el Ser Supremo sin juzgar la fe de los demás?"},
+{n:22,g:"cincel",t:"El Masón ante la Sociedad",i:"Responde a la segunda pregunta de la plancha triangular: los deberes para con los semejantes. El masón ha de ser buen ciudadano, buen miembro de su familia y trabajador útil. De ahí el lema que se recuerda al finalizar las tenidas: todos para uno y uno para todos.",p:"¿Qué hice esta semana por alguien que no podía devolverme el favor?"},
+{n:23,g:"cincel",t:"El Masón ante Sí Mismo",i:"Responde a la tercera pregunta de la plancha triangular: los deberes para consigo mismo. Examinar con conciencia los propios actos, cuidar el cuerpo, cultivar la inteligencia y corregir el carácter. Es el núcleo de la piedra, porque nadie puede labrarla por otro.",p:"¿Qué descubrí de mí al trabajar estos temas?"},
+{n:29,g:"cincel",t:"El Número Tres",i:"Es el primer número impar, formado por la unidad y el primer par. Aparece en la naturaleza, en las ciencias y en las religiones, y ordena casi todo el primer grado: tres Grandes Luces, tres dignidades, tres viajes.",p:"¿Qué tres compromisos sostienen hoy mi vida?"},
+{n:31,g:"cincel",t:"Los Tres Puntos",i:"Los tres puntos en triángulo (∴) acompañan las abreviaturas masónicas. Son emblema de la discreción y recuerdan el compromiso contraído ante el Ara. También expresan el equilibrio de tres principios que sostienen la obra.",p:"¿Qué debo guardar con discreción y qué debo compartir con generosidad?"},
+{n:32,g:"cincel",t:"Objeto del Grado de Aprendiz",i:"El grado de Aprendiz es el inicio de la carrera masónica. Enseña moral y civismo, a vivir en sociedad y a conocer las necesidades humanas. Su objeto es formar a un hombre capaz de servir a sus semejantes y de propagar el amor a la humanidad.",p:"Ahora que la piedra está descubierta, ¿qué obra quiero construir con ella?"}
+];
+const BY=new Map(T.map(x=>[x.n,x]));
+
+// ---------- estado (solo en este dispositivo)
+const KEY="piedra-bruta-aprendiz:v1";
+let S={done:[],notes:{}};
+try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);if(o&&Array.isArray(o.done))S={done:o.done,notes:o.notes||{}}}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const isDone=n=>S.done.includes(n);
+
+// ---------- geometría de la piedra
+const W=1000,H=560,NS="http://www.w3.org/2000/svg";
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function hash(x,y){let h=Math.imul(Math.round(x*2)|0,73856093)^Math.imul(Math.round(y*2)|0,19349663);h=Math.imul(h^h>>>13,0x5bd1e995);return((h^h>>>15)>>>0)/4294967296}
+const R=rng(808);
+// silueta de canto rodado
+const sil=[];const NP=16;
+for(let k=0;k<NP;k++){const a=k/NP*Math.PI*2;const f=.9+R()*.1;sil.push([500+Math.cos(a)*478*f,282+Math.sin(a)*262*f])}
+function clipHalf(poly,a,b,c){ // conserva a*x+b*y<=c
+  const out=[];for(let i=0;i<poly.length;i++){const P=poly[i],Q=poly[(i+1)%poly.length];const dp=a*P[0]+b*P[1]-c,dq=a*Q[0]+b*Q[1]-c;
+    if(dp<=0)out.push(P);if((dp<0&&dq>0)||(dp>0&&dq<0)){const t=dp/(dp-dq);out.push([P[0]+(Q[0]-P[0])*t,P[1]+(Q[1]-P[1])*t])}}return out}
+function inPoly(p,poly){let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])c=!c}return c}
+function centroid(poly){let A=0,x=0,y=0;for(let i=0;i<poly.length;i++){const p=poly[i],q=poly[(i+1)%poly.length];const cr=p[0]*q[1]-q[0]*p[1];A+=cr;x+=(p[0]+q[0])*cr;y+=(p[1]+q[1])*cr}A/=2;return A?[x/(6*A),y/(6*A)]:poly[0]}
+function voronoi(region,seeds){return seeds.map((s,i)=>{let poly=region.slice();seeds.forEach((q,j)=>{if(i===j||!poly.length)return;const a=q[0]-s[0],b=q[1]-s[1];poly=clipHalf(poly,a,b,(q[0]*q[0]+q[1]*q[1]-s[0]*s[0]-s[1]*s[1])/2)});return poly})}
+// tres bandas: cada herramienta descubre una parte de la frase
+const BANDS=[["mazo",0,472],["regla",472,686],["cincel",686,1000]];
+const cells=[];
+BANDS.forEach(([g,x0,x1])=>{
+  let region=clipHalf(clipHalf(sil,-1,0,-x0),1,0,x1);
+  let seeds=[];let guard=0;
+  while(seeds.length<11&&guard++<5000){const p=[x0+R()*(x1-x0),20+R()*520];if(inPoly(p,region))seeds.push(p)}
+  for(let it=0;it<4;it++){seeds=voronoi(region,seeds).map(c=>c.length>2?centroid(c):seeds[0])}
+  let polys=voronoi(region,seeds).map(p=>({p,c:centroid(p)}));
+  polys.sort((A,B)=>(Math.floor(A.c[1]/140)-Math.floor(B.c[1]/140))||(A.c[0]-B.c[0]));
+  const temas=T.filter(t=>t.g===g);
+  polys.forEach((o,i)=>cells.push({...o,g,tema:temas[i]}));
+});
+// bordes ásperos: subdivisión determinista compartida entre vecinos
+function roughEdge(a,b,depth){
+  const key=a[0]<b[0]||(a[0]===b[0]&&a[1]<b[1]);const P=key?a:b,Q=key?b:a;
+  const mid=(function sub(p,q,d,amp){if(d===0)return[];const mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2;const dx=q[0]-p[0],dy=q[1]-p[1];const L=Math.hypot(dx,dy);if(L<14)return[];
+    const off=(hash(mx,my)-.5)*Math.min(amp,L*.28);const m=[mx-dy/L*off,my+dx/L*off];return[...sub(p,m,d-1,amp*.55),m,...sub(m,q,d-1,amp*.55)]})(P,Q,depth,22);
+  return key?mid:mid.reverse();
+}
+function snap(p){return[Math.round(p[0]*2)/2,Math.round(p[1]*2)/2]}
+function roughPath(poly){const P=poly.map(snap);let d="";for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length];if(i===0)d+="M"+a[0]+" "+a[1];for(const m of roughEdge(a,b,3))d+="L"+m[0].toFixed(1)+" "+m[1].toFixed(1);d+="L"+b[0]+" "+b[1]}return d+"Z"}
+
+// ---------- textura de piedra (canvas → patrón)
+function texture(){
+  const w=500,h=280,c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d");
+  const r=rng(77);const grid=(s)=>{const g=[];for(let i=0;i<=s;i++){g.push([]);for(let j=0;j<=s;j++)g[i].push(r())}return g};
+  const octs=[[6,.5],[14,.25],[34,.15],[90,.1]].map(([s,a])=>({s,a,g:grid(s)}));
+  const hgt=new Float32Array(w*h);
+  for(let y=0;y<h;y++)for(let X=0;X<w;X++){let v=0;for(const o of octs){const fx=X/w*o.s,fy=y/h*o.s*(h/w);const i=Math.floor(fx),j=Math.floor(fy)%o.s;const tx=fx-i,ty=fy-Math.floor(fy);const sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);const g=o.g;
+    const a=g[i][j],b=g[i+1][j],cc=g[i][j+1],d=g[i+1][j+1];v+=o.a*((a*(1-sx)+b*sx)*(1-sy)+(cc*(1-sx)+d*sx)*sy)}hgt[y*w+X]=v}
+  const img=x.createImageData(w,h);
+  for(let y=0;y<h;y++)for(let X=0;X<w;X++){const i=y*w+X;const dx=hgt[i]-(hgt[i+(X<w-1?1:0)]),dy=hgt[i]-(hgt[i+(y<h-1?w:0)]);
+    let L=.62+(dx+dy)*9+(hgt[i]-.5)*.5;L=Math.max(.25,Math.min(1.15,L));const sp=r()<.012?-.18:0;L+=sp;
+    img.data[i*4]=140*L;img.data[i*4+1]=134*L;img.data[i*4+2]=122*L;img.data[i*4+3]=255}
+  x.putImageData(img,0,0);return c.toDataURL("image/png");
+}
+
+const svg=document.getElementById("stone");
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const tex=texture();
+const defs=el("defs",{},svg);
+const pat=el("pattern",{id:"tex",patternUnits:"userSpaceOnUse",width:W,height:H},defs);el("image",{href:tex,width:W,height:H,preserveAspectRatio:"none"},pat);
+const lg=el("linearGradient",{id:"pul",x1:"0",y1:"0",x2:"0.3",y2:"1"},defs);
+el("stop",{offset:"0","stop-color":"var(--polish-a)"},lg);el("stop",{offset:"1","stop-color":"var(--polish-b)"},lg);
+const shadowF=el("filter",{id:"sombra",x:"-5%",y:"-5%",width:"110%",height:"120%"},defs);el("feDropShadow",{dx:"0",dy:"8",stdDeviation:"9","flood-opacity":".28"},shadowF);
+const silD=roughPath(sil);
+// capa pulida con la frase
+const base=el("g",{filter:"url(#sombra)"},svg);
+el("path",{d:silD,fill:"url(#pul)"},base);
+el("path",{d:silD,fill:"url(#tex)",opacity:".18"},svg);
+const words=[["CONÓCETE",92,372],["A TI",522,140],["MISMO",728,200]];
+const txt=el("g",{"font-family":"Cinzel, 'Times New Roman', serif","font-weight":"700","font-size":"62","aria-hidden":"true"},svg);
+words.forEach(([w,x,len])=>{
+  el("text",{x,y:306,textLength:len,lengthAdjust:"spacing",fill:"var(--engrave-hi)"},txt).textContent=w;
+  el("text",{x,y:303,textLength:len,lengthAdjust:"spacing",fill:"var(--engrave)"},txt).textContent=w;
+});
+el("text",{x:500,y:360,"text-anchor":"middle","font-family":"Cinzel, serif","font-size":"18","letter-spacing":"6",fill:"var(--engrave)",opacity:".75","aria-hidden":"true"},svg).textContent="NOSCE TE IPSUM";
+
+// fragmentos
+const fragG=el("g",{},svg);
+const FR=new Map();
+const tones={mazo:"#6E5440",regla:"#6F6650",cincel:"#4F5D60"};
+cells.forEach((c,k)=>{
+  const t=c.tema;const d=roughPath(c.p);
+  const g=el("g",{class:"frag",tabindex:"0",role:"button","aria-label":`Tema ${t.n}: ${t.t}`,"data-n":t.n},fragG);
+  const shade=.82+hash(c.c[0],c.c[1])*.3;
+  el("path",{d,fill:`url(#tex)`,style:`filter:brightness(${shade.toFixed(2)})`},g);
+  el("path",{class:"tint",d,fill:tones[c.g],"fill-opacity":".22",style:"transition:fill-opacity .2s"},g);
+  el("path",{class:"seam",d},g);
+  el("text",{class:"num",x:c.c[0].toFixed(1),y:c.c[1].toFixed(1)},g).textContent=t.n;
+  g.addEventListener("click",()=>abrir(t.n));
+  g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();abrir(t.n)}});
+  FR.set(t.n,{g,cx:c.c[0]});
+  if(isDone(t.n))g.classList.add("cae","fuera");
+});
+
+// ---------- bitácora
+const toolsEl=document.getElementById("tools");
+const BTN=new Map();
+Object.entries(HERR).forEach(([g,h])=>{
+  const col=document.createElement("div");col.className="tool";
+  col.innerHTML=`<h3 class="t-${g}">${h.nombre}</h3><div class="sub">${h.sub}</div><ul></ul>`;
+  const ul=col.querySelector("ul");
+  T.filter(t=>t.g===g).forEach(t=>{
+    const li=document.createElement("li");const b=document.createElement("button");b.type="button";b.className="tema-btn";
+    b.innerHTML=`<span class="n t-${g}">${t.n}</span><span class="t">${t.t}${t.r?'<span class="res-mark">Reservado</span>':""}</span><span class="st"></span>`;
+    b.addEventListener("click",()=>abrir(t.n));li.appendChild(b);ul.appendChild(li);BTN.set(t.n,b);
+  });
+  toolsEl.appendChild(col);
+});
+const progEl=document.getElementById("progress");
+Object.entries(HERR).forEach(([g,h])=>{const d=document.createElement("div");d.className="prog";d.innerHTML=`<div class="lbl"><span class="t-${g}">${h.nombre.replace(" de 24 pulgadas","")}</span><span id="pc-${g}"></span></div><div class="bar"><i class="b-${g}" id="pb-${g}"></i></div>`;progEl.appendChild(d)});
+const FRASES={mazo:"“Conócete”",regla:"“a ti”",cincel:"“mismo”"};
+function render(){
+  T.forEach(t=>{const b=BTN.get(t.n);const done=isDone(t.n);b.classList.toggle("hecho",done);
+    b.querySelector(".st").textContent=done?"Retirado":(S.notes[t.n]?"En trabajo":"");
+    b.setAttribute("aria-label",`Tema ${t.n}: ${t.t}${t.r?", reservado":""}. ${done?"Fragmento retirado":"Por trabajar"}`)});
+  let total=0;const parts=[];
+  Object.keys(HERR).forEach(g=>{const n=T.filter(t=>t.g===g&&isDone(t.n)).length;total+=n;
+    document.getElementById("pc-"+g).textContent=n+" / 11";document.getElementById("pb-"+g).style.width=(n/11*100)+"%";if(n===11)parts.push(g)});
+  const rv=document.getElementById("revelada");
+  if(total===33){rv.hidden=false;rv.innerHTML="<b>La piedra está descubierta.</b> No se le agregó nada: solo se le quitó lo que sobraba. Lo que siempre llevó dentro es la máxima del Templo de Delfos que el Aprendiz hace suya: <i>Conócete a ti mismo</i>.";}
+  else if(parts.length){rv.hidden=false;rv.textContent=`Has retirado ${total} de 33 fragmentos. Ya se lee ${parts.map(g=>FRASES[g]).join(" y ")}.`}
+  else if(total){rv.hidden=false;rv.textContent=`Has retirado ${total} de 33 fragmentos. Completa una herramienta para que aparezca la primera palabra.`}
+  else rv.hidden=true;
+}
+
+// ---------- ficha
+const dlg=document.getElementById("ficha");let cur=null;
+const $=id=>document.getElementById(id);
+function abrir(n){
+  cur=n;const t=BY.get(n);
+  $("f-chip").textContent=`Tema ${t.n} · ${HERR[t.g].nombre}`;$("f-chip").className="chip t-"+t.g;
+  $("f-title").textContent=t.t;$("f-idea").textContent=t.i;$("f-preg").textContent=t.p;$("f-res").hidden=!t.r;
+  $("f-nota").value=S.notes[n]||"";syncToggle();
+  if(typeof dlg.showModal==="function"){if(!dlg.open)dlg.showModal()}else dlg.setAttribute("open","");
+}
+function syncToggle(){const d=isDone(cur);$("f-toggle").textContent=d?"Volver a colocar el fragmento":"Retirar el fragmento";
+  $("f-hint").textContent=d?"Este tema ya fue trabajado.":"Hazlo cuando el tema esté estudiado."}
+function cerrar(){if(dlg.open){dlg.close?dlg.close():dlg.removeAttribute("open")}}
+$("f-close").addEventListener("click",cerrar);
+dlg.addEventListener("click",e=>{if(e.target===dlg)cerrar()});
+dlg.addEventListener("close",()=>{if(cur!=null&&BTN.get(cur))BTN.get(cur).focus({preventScroll:true})});
+let tmo;$("f-nota").addEventListener("input",e=>{const v=e.target.value;if(v.trim())S.notes[cur]=v;else delete S.notes[cur];clearTimeout(tmo);tmo=setTimeout(()=>{save();render()},300)});
+$("f-toggle").addEventListener("click",()=>{
+  const n=cur,f=FR.get(n);
+  if(isDone(n)){S.done=S.done.filter(x=>x!==n);f.g.classList.remove("fuera");f.g.getBoundingClientRect();f.g.style.transform="";f.g.classList.remove("cae")}
+  else{S.done.push(n);const dir=f.cx<500?-1:1;f.g.style.transform=`translate(${dir*(40+hash(n,3)*60)}px,140px) rotate(${dir*(18+hash(n,9)*30)}deg)`;f.g.classList.add("cae");setTimeout(()=>{if(isDone(n))f.g.classList.add("fuera")},750)}
+  save();render();syncToggle();
+  if(isDone(n))setTimeout(cerrar,350);
+});
+
+// ---------- copiar y reiniciar
+$("copy").addEventListener("click",()=>{
+  const out=["BITÁCORA DEL CANTERO · La Piedra Bruta del Aprendiz",""];
+  Object.entries(HERR).forEach(([g,h])=>{out.push(h.nombre.toUpperCase());T.filter(t=>t.g===g).forEach(t=>{out.push(`Tema ${t.n}. ${t.t}${isDone(t.n)?"  [retirado]":""}`);if(S.notes[t.n])out.push("  "+S.notes[t.n].replace(/\n/g,"\n  "));});out.push("")});
+  const text=out.join("\n");const msg=$("copy-msg");const fb=$("copy-fallback");
+  const ok=()=>{msg.hidden=false;msg.textContent="Bitácora copiada. Puedes pegarla en un correo o documento.";fb.hidden=true};
+  const fail=()=>{fb.hidden=false;fb.value=text;fb.focus();fb.select();msg.hidden=false;msg.textContent="Selecciona el texto de abajo y cópialo."};
+  try{navigator.clipboard.writeText(text).then(ok,fail)}catch(e){fail()}
+});
+$("reset").addEventListener("click",()=>{$("reset-confirm").hidden=false;$("reset-no").focus()});
+$("reset-no").addEventListener("click",()=>{$("reset-confirm").hidden=true});
+$("reset-yes").addEventListener("click",()=>{S={done:[],notes:{}};save();FR.forEach(f=>{f.g.classList.remove("cae","fuera");f.g.style.transform=""});$("reset-confirm").hidden=true;render()});
+
+// ---------- respaldo en archivo
+function hoy(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+$("export").addEventListener("click",()=>{
+  const data={app:"piedra-bruta-aprendiz",version:2,fecha:new Date().toISOString(),done:S.done,notes:S.notes};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="piedra-bruta-respaldo-"+hoy()+".json";
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+  const msg=$("copy-msg");msg.hidden=false;msg.textContent="Respaldo descargado. Guárdalo en un lugar seguro.";
+});
+let pendiente=null;
+$("import").addEventListener("click",()=>$("import-file").click());
+$("import-file").addEventListener("change",e=>{
+  const f=e.target.files&&e.target.files[0];e.target.value="";if(!f)return;
+  const rd=new FileReader();
+  rd.onload=()=>{const msg=$("copy-msg");
+    try{const o=JSON.parse(rd.result);
+      if(!o||o.app!=="piedra-bruta-aprendiz"||!Array.isArray(o.done))throw 0;
+      const done=o.done.filter(n=>BY.has(n));const notes={};for(const k in (o.notes||{}))if(BY.has(+k)&&typeof o.notes[k]==="string")notes[k]=o.notes[k];
+      pendiente={done,notes};
+      const fecha=o.fecha?new Date(o.fecha).toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"}):"sin fecha";
+      $("import-info").textContent=`Respaldo del ${fecha}: ${done.length} ${done.length===1?"fragmento retirado":"fragmentos retirados"} y ${Object.keys(notes).length} ${Object.keys(notes).length===1?"nota":"notas"}. Reemplazará el avance actual de este dispositivo.`;
+      $("import-confirm").hidden=false;msg.hidden=true;$("import-no").focus();
+    }catch(_){msg.hidden=false;msg.textContent="Ese archivo no es un respaldo de la Piedra Bruta. Elige el archivo .json que descargaste con “Descargar respaldo”."}
+  };
+  rd.readAsText(f);
+});
+$("import-no").addEventListener("click",()=>{pendiente=null;$("import-confirm").hidden=true});
+$("import-yes").addEventListener("click",()=>{if(!pendiente)return;S=pendiente;pendiente=null;save();
+  FR.forEach((f,n)=>{f.g.style.transform="";if(isDone(n))f.g.classList.add("cae","fuera");else f.g.classList.remove("cae","fuera")});
+  $("import-confirm").hidden=true;render();const msg=$("copy-msg");msg.hidden=false;msg.textContent="Respaldo cargado.";});
+
+// ---------- almacenamiento persistente, app instalable y modo sin conexión
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+if("serviceWorker" in navigator&&location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
+const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+let dismissed=false;try{dismissed=localStorage.getItem("pb-install-no")==="1"}catch(e){}
+let deferred=null;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;if(!standalone&&!dismissed){$("install").hidden=false;$("install-btn").hidden=false}});
+const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+if(ios&&!standalone&&!dismissed){$("install").hidden=false;$("install-txt").textContent="En Safari toca Compartir y luego “Agregar a inicio”. Quedará como app y funcionará sin internet."}
+$("install-btn").addEventListener("click",async()=>{if(!deferred)return;deferred.prompt();try{await deferred.userChoice}catch(e){}deferred=null;$("install").hidden=true});
+$("install-no").addEventListener("click",()=>{$("install").hidden=true;try{localStorage.setItem("pb-install-no","1")}catch(e){}});
+window.addEventListener("appinstalled",()=>{$("install").hidden=true});
+
+render();
+})();
+</script>
+</body>
+</html>
