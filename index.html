@@ -19,14 +19,14 @@
 <meta property="og:title" content="La Piedra Bruta del Aprendiz">
 <meta property="og:description" content="Los 33 temas del Primer Grado, trabajados como una piedra bruta que se desbasta tema por tema.">
 <meta property="og:url" content="https://yzsntn.github.io/piedra-bruta/">
-<meta property="og:image" content="https://yzsntn.github.io/piedra-bruta/og-image.png">
+<meta property="og:image" content="https://yzsntn.github.io/piedra-bruta/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Piedra bruta de 33 fragmentos con el título La Piedra Bruta del Aprendiz">
+<meta property="og:image:alt" content="La piedra bruta entre dos columnas bajo un cielo estrellado, con el Delta y el título Piedra bruta del Aprendiz">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="fonts/cinzel.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add("js");try{if(localStorage.getItem("pb-penumbra")==="1")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+<script>document.documentElement.classList.add("js");try{localStorage.removeItem("pb-penumbra")}catch(e){}</script>
 <style>
 @font-face{font-family:"Cinzel";src:url("fonts/cinzel.woff2") format("woff2");font-weight:400 900;font-display:swap}
 @font-face{font-family:"Cormorant Garamond";src:url("fonts/cormorant-garamond.woff2") format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
@@ -52,9 +52,6 @@
   --ease:cubic-bezier(.16,1,.3,1);
   --brillo:0 0 24px rgba(217,180,106,.35);
 }
-/* «Penumbra»: la Cámara de Reflexiones. Se apagan las estrellas; solo queda la luz de las velas. */
-:root[data-theme="dark"]{--bg:#030305;--surface:rgba(10,10,14,.8);--muted:#8d877a}
-:root[data-theme="dark"] #cielo{opacity:.12}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{background:var(--bg);scroll-behavior:smooth}
@@ -71,7 +68,6 @@ a{color:inherit;text-underline-offset:.2em}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .saltar{position:absolute;left:var(--m);top:-60px;z-index:20;background:var(--oro);color:var(--accent-ink);padding:12px 16px;text-decoration:none}
 .saltar:focus{top:12px}
-.muted{color:var(--muted)}
 
 /* ---------- Cornisa superior */
 .fila{display:flex;align-items:center;gap:16px;padding:18px var(--m);border-bottom:1px solid var(--linea-suave);background:linear-gradient(rgba(6,7,12,.85),rgba(6,7,12,.4));z-index:20}
@@ -79,10 +75,10 @@ a{color:inherit;text-underline-offset:.2em}
 .t-nav{flex:1;display:flex;align-items:center;justify-content:flex-end}
 .menu{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .enlaces{display:flex;gap:30px;list-style:none;margin:0;padding:0 0 0 24px;white-space:nowrap}
-.enlaces a{font-family:var(--f-titulo);font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;transition:color .3s}
+.enlaces a{font-family:var(--f-titulo);font-size:.88rem;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;transition:color .3s}
 .enlaces a:hover{color:var(--oro-claro)}
 .toggles{display:flex;gap:6px}
-.tg{all:unset;box-sizing:border-box;cursor:pointer;font-family:var(--f-titulo);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);padding:0 14px;min-height:40px;display:inline-flex;align-items:center;border:1px solid var(--linea-suave);border-radius:999px;transition:all .3s}
+.tg{all:unset;box-sizing:border-box;cursor:pointer;font-family:var(--f-titulo);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 14px;min-height:40px;display:inline-flex;align-items:center;border:1px solid var(--linea-suave);border-radius:999px;transition:all .3s}
 .tg:hover{color:var(--oro-claro);border-color:var(--linea)}
 .tg[aria-pressed="true"]{color:var(--accent-ink);background:var(--oro);border-color:var(--oro)}
 .menu-btn{display:none}
@@ -99,7 +95,7 @@ a{color:inherit;text-underline-offset:.2em}
 h1{font-family:var(--f-titulo);font-size:clamp(2.8rem,8.5vw,6.4rem);line-height:1;letter-spacing:.12em;color:var(--oro-claro);text-shadow:0 0 34px rgba(217,180,106,.3);display:flex;gap:.3em;justify-content:center;flex-wrap:wrap}
 .lines .line{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
 .lines [data-line]{display:block}
-.t-nombre .sub{font-family:var(--f-titulo);font-size:clamp(.75rem,1.4vw,.95rem);letter-spacing:.42em;text-transform:uppercase;color:var(--muted);max-width:none}
+.t-nombre .sub{font-family:var(--f-titulo);font-size:clamp(.75rem,1.4vw,.95rem);letter-spacing:.28em;text-transform:uppercase;color:var(--muted);max-width:none}
 
 /* La piedra entre la columna oscura y la columna de oro */
 .t-piedra{position:relative;min-height:0;aspect-ratio:16/8;margin:2vh 0 0;padding:0 clamp(48px,9vw,120px)}
@@ -131,7 +127,7 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 /* Debajo de la piedra: el retrato, la invocación y las tres luces */
 .t-bajo{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr) minmax(0,1.2fr);gap:clamp(20px,3vw,44px);align-items:center;padding:6vh 0 4vh;border-bottom:1px solid var(--linea-suave)}
 .t-foto{margin:0;grid-row:1;grid-column:1;justify-self:center;width:min(220px,100%);aspect-ratio:3/4;border-radius:50%;overflow:hidden;border:1px solid var(--linea);box-shadow:0 0 0 8px rgba(217,180,106,.05),0 0 60px rgba(0,0,0,.8)}
-.t-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;filter:sepia(.6) contrast(1.05) brightness(.85)}
+.t-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
 .t-lema{grid-column:2;font-style:italic;font-size:var(--step-lead);line-height:1.45;color:var(--ink);text-align:center}
 .t-avance{grid-column:3;display:flex;flex-direction:column;gap:16px;padding:24px;border:1px solid var(--linea);background:var(--surface);position:relative}
 .t-avance::before{content:"";position:absolute;inset:6px;border:1px solid var(--linea-suave);pointer-events:none}
@@ -139,7 +135,7 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 .cuenta .num-total{display:block;font-family:var(--f-titulo);font-style:normal;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;color:var(--oro-claro);text-shadow:var(--brillo)}
 .progress{display:grid;gap:12px}
 .prog{display:grid;gap:6px}
-.prog .lbl{display:flex;justify-content:space-between;gap:8px;font-family:var(--f-titulo);font-size:.75rem;letter-spacing:.22em;text-transform:uppercase}
+.prog .lbl{display:flex;justify-content:space-between;gap:8px;font-family:var(--f-titulo);font-size:.86rem;letter-spacing:.14em;text-transform:uppercase}
 .prog .lbl span:last-child{color:var(--muted);letter-spacing:.1em}
 .bar{height:3px;background:rgba(217,180,106,.15);overflow:hidden;border-radius:2px}
 .bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--oro-hondo),var(--oro-claro));box-shadow:0 0 10px var(--oro);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease)}
@@ -147,12 +143,11 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 .revelada i{color:var(--oro)}
 
 /* Botones */
-.btn{font-family:var(--f-titulo);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;border:1px solid var(--oro);border-radius:0;min-height:48px;padding:12px 22px;cursor:pointer;background:var(--oro);color:var(--accent-ink);transition:background .3s,color .3s,box-shadow .3s}
+.btn{font-family:var(--f-titulo);font-size:.88rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--oro);border-radius:0;min-height:48px;padding:12px 22px;cursor:pointer;background:var(--oro);color:var(--accent-ink);transition:background .3s,color .3s,box-shadow .3s}
 .btn:hover{background:var(--oro-claro);box-shadow:var(--brillo)}
 .btn:active{transform:translateY(1px)}
 .t-avance .btn{margin-top:4px;align-self:stretch}
-.btn.quiet{background:transparent;color:var(--oro)}
-.lnk{all:unset;cursor:pointer;font-family:var(--f-titulo);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro);min-height:44px;display:inline-flex;align-items:center;border-bottom:1px solid var(--linea);transition:color .3s,border-color .3s}
+.lnk{all:unset;cursor:pointer;font-family:var(--f-titulo);font-size:.85rem;letter-spacing:.13em;text-transform:uppercase;color:var(--oro);min-height:44px;display:inline-flex;align-items:center;border-bottom:1px solid var(--linea);transition:color .3s,border-color .3s}
 .lnk:hover{color:var(--oro-claro);border-color:var(--oro)}
 .lnk:focus-visible{outline:1px solid var(--oro);outline-offset:4px}
 .lnk.quiet{color:var(--muted);border-color:transparent}
@@ -169,12 +164,12 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 .lead{font-size:var(--step-lead);font-style:italic;line-height:1.4;max-width:34ch;margin:0 auto}
 .cuatro{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,3vw,36px);margin-top:7vh;text-align:left}
 .cuatro p{color:var(--muted);font-size:var(--step-small);line-height:1.55;padding-top:18px;border-top:1px solid var(--linea)}
-.cuatro b{display:block;font-family:var(--f-titulo);font-weight:400;color:var(--oro);letter-spacing:.18em;text-transform:uppercase;font-size:.8rem;margin-bottom:8px}
+.cuatro b{display:block;font-family:var(--f-titulo);font-weight:400;color:var(--oro);letter-spacing:.12em;text-transform:uppercase;font-size:.88rem;margin-bottom:8px}
 
 /* Mosaico de imágenes como vitral */
 .mosaico{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,4fr) minmax(0,5fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:10px;max-width:1200px;margin:clamp(90px,12vw,170px) auto 0;padding:0 var(--m);min-height:min(88svh,800px)}
 .mosaico figure{margin:0;overflow:hidden;border:1px solid var(--linea)}
-.mosaico img{width:100%;height:100%;object-fit:cover;filter:sepia(.55) contrast(1.05) brightness(.8)}
+.mosaico img{width:100%;height:100%;object-fit:cover}
 .mz-a{grid-row:1/3}.mz-c{grid-row:1/3;grid-column:3}
 .mz-b,.mz-d{padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;justify-content:center;gap:20px;text-align:center;border:1px solid var(--linea);background:var(--surface)}
 .mz-b blockquote{margin:0;font-family:var(--f-titulo);font-size:clamp(1.2rem,2vw,1.7rem);line-height:1.35;color:var(--oro-claro);letter-spacing:.04em}
@@ -184,7 +179,6 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 /* El método: cuatro peldaños */
 .escalera{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.5vw,30px);align-items:end}
 .escalera li{display:grid;gap:12px;text-align:center;padding:28px 20px;border:1px solid var(--linea);background:var(--surface);position:relative}
-.escalera li:nth-child(1){margin-top:0}.escalera li:nth-child(2){margin-top:-30px}
 .escalera li:nth-child(1){transform:translateY(90px)}.escalera li:nth-child(2){transform:translateY(60px)}.escalera li:nth-child(3){transform:translateY(30px)}
 .escalera li::before{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:40px;height:1px;background:var(--oro);box-shadow:var(--brillo)}
 .paso{font-family:var(--f-titulo);font-size:clamp(1.1rem,1.6vw,1.4rem);line-height:1.25;color:var(--oro-claro);letter-spacing:.04em}
@@ -194,10 +188,10 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 
 /* Bitácora: un libro abierto */
 .bit-titulo{font-family:var(--f-titulo);font-size:var(--step-head);text-align:center;color:var(--oro-claro);letter-spacing:.1em;line-height:1.1}
-.bit-titulo .ind{display:block;font-size:.5em;letter-spacing:.4em;color:var(--muted);margin-bottom:.4em}
+.bit-titulo .ind{display:block;font-size:.5em;letter-spacing:.26em;color:var(--muted);margin-bottom:.4em}
 .bit-cuerpo{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,60px);margin-top:6vh;align-items:start}
 .bit-foto{margin:0;position:sticky;top:24px;border:1px solid var(--linea);padding:10px;background:var(--surface)}
-.bit-foto img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:sepia(.55) contrast(1.05) brightness(.8)}
+.bit-foto img{width:100%;aspect-ratio:4/5;object-fit:cover}
 .bit-foto figcaption{font-size:var(--step-small);color:var(--muted);font-style:italic;margin-top:10px;text-align:center}
 .bit-tabla{display:grid;gap:22px}
 .bit-tabla>p{color:var(--muted);font-style:italic}
@@ -217,7 +211,7 @@ canvas.polvo{position:absolute;inset:0;width:100%;height:100%;pointer-events:non
 .tema-btn.sig::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:2px;background:var(--oro);box-shadow:var(--brillo)}
 .tema-btn:focus-visible{outline:1px solid var(--oro);outline-offset:-1px}
 .tema-btn .n{font-family:var(--f-titulo);font-size:.9em;color:var(--oro)}
-.tema-btn .st{font-family:var(--f-titulo);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.tema-btn .st{font-family:var(--f-titulo);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .tema-btn.hecho .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--linea)}
 .tema-btn.hecho .st,.tema-btn.sig .st{color:var(--oro)}
 .res-mark{font-size:.8em;font-style:italic;color:var(--oro);margin-left:8px;white-space:nowrap}
@@ -231,14 +225,14 @@ dialog[open]{animation:sube .6s var(--ease)}
 .ficha{position:relative;display:grid;gap:22px;padding:clamp(28px,6vw,54px);background:radial-gradient(ellipse at 50% 0%,#1b1f36,#0b0c15 72%);border:1px solid var(--linea);box-shadow:0 40px 120px rgba(0,0,0,.85),inset 0 0 80px rgba(0,0,0,.55)}
 .ficha::before{content:"";position:absolute;inset:10px;border:1px solid var(--linea-suave);pointer-events:none}
 .ficha .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.chip{font-family:var(--f-titulo);font-size:.75rem;letter-spacing:.28em;text-transform:uppercase}
+.chip{font-family:var(--f-titulo);font-size:.86rem;letter-spacing:.17em;text-transform:uppercase}
 .ficha h2{font-family:var(--f-titulo);font-size:clamp(1.7rem,4.6vw,2.6rem);line-height:1.15;color:var(--oro-claro);letter-spacing:.05em;text-align:center}
-.ficha .rn-big{display:block;font-family:var(--f-titulo);font-size:.8rem;letter-spacing:.42em;color:var(--oro);margin-bottom:12px}
-.ficha .k{font-family:var(--f-titulo);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--oro);margin-bottom:8px}
+.ficha .rn-big{display:block;font-family:var(--f-titulo);font-size:.88rem;letter-spacing:.28em;color:var(--oro);margin-bottom:12px}
+.ficha .k{font-family:var(--f-titulo);font-size:.84rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:8px}
 #f-idea{font-size:var(--step-lead);line-height:1.45}
 .sentidos{display:grid;gap:16px}
 .tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
-.tab{all:unset;box-sizing:border-box;cursor:pointer;font-family:var(--f-titulo);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);border:1px solid var(--linea);padding:0 18px;min-height:44px;display:inline-flex;align-items:center;transition:all .3s}
+.tab{all:unset;box-sizing:border-box;cursor:pointer;font-family:var(--f-titulo);font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border:1px solid var(--linea);padding:0 18px;min-height:44px;display:inline-flex;align-items:center;transition:all .3s}
 .tab:hover{color:var(--oro-claro)}
 .tab[aria-selected="true"]{background:var(--oro);color:var(--accent-ink);border-color:var(--oro)}
 .tab:focus-visible{outline:1px solid var(--oro);outline-offset:3px}
@@ -249,7 +243,7 @@ textarea{width:100%;min-height:140px;resize:vertical;font:inherit;font-size:var(
 textarea:focus{outline:none;border-color:var(--oro);box-shadow:0 0 0 3px rgba(217,180,106,.12)}
 textarea::placeholder{color:var(--muted);font-style:italic}
 label.k{display:block}
-.x{all:unset;cursor:pointer;font-family:var(--f-titulo);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);min-height:44px;display:inline-flex;align-items:center;transition:color .3s}
+.x{all:unset;cursor:pointer;font-family:var(--f-titulo);font-size:.84rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);min-height:44px;display:inline-flex;align-items:center;transition:color .3s}
 .x:hover{color:var(--oro-claro)}
 .libro{font-size:var(--step-small);color:var(--muted);text-align:center;font-style:italic}
 .libro b{color:var(--oro);font-weight:400}
@@ -270,7 +264,7 @@ label.k{display:block}
 .pie{margin-top:clamp(110px,14vw,200px);padding:60px var(--m) 30px;border-top:1px solid var(--linea-suave);background:linear-gradient(transparent,rgba(0,0,0,.6));display:grid;gap:60px}
 .pie-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;max-width:1200px;width:100%;margin:0 auto}
 .pie-cols p{font-size:var(--step-small);color:var(--muted);line-height:1.5}
-.pie-cols p.k{font-family:var(--f-titulo);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--oro);margin-bottom:6px}
+.pie-cols p.k{font-family:var(--f-titulo);font-size:.85rem;letter-spacing:.17em;text-transform:uppercase;color:var(--oro);margin-bottom:6px}
 .pie-cols a{color:var(--ink)}
 .pie .res-mark{color:var(--oro)}
 .marca{display:block;width:min(900px,100%);margin:0 auto;height:auto;fill:var(--oro);opacity:.85;filter:drop-shadow(0 0 20px rgba(217,180,106,.25))}
@@ -303,7 +297,7 @@ label.k{display:block}
 }
 @media (max-width:640px){
   .fila{padding:12px 16px}
-  .menu-btn{all:unset;box-sizing:border-box;cursor:pointer;font-family:var(--f-titulo);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--oro);min-height:44px;display:inline-flex;align-items:center;padding:0 6px}
+  .menu-btn{all:unset;box-sizing:border-box;cursor:pointer;font-family:var(--f-titulo);font-size:.86rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);min-height:44px;display:inline-flex;align-items:center;padding:0 6px}
   .menu{display:none;position:absolute;left:12px;right:12px;top:calc(100% + 6px);background:#0b0d18;border:1px solid var(--linea);padding:16px 20px 20px;flex-direction:column;align-items:flex-start;gap:12px;box-shadow:0 30px 60px rgba(0,0,0,.7)}
   .menu.abierto{display:flex}
   .enlaces{flex-direction:column;gap:0;padding:0}
@@ -367,7 +361,6 @@ label.k{display:block}
         <li><a href="#bitacora">Bitácora</a></li>
       </ul>
       <div class="toggles">
-        <button class="tg" id="t-luz" type="button" aria-pressed="false">Penumbra</button>
         <button class="tg" id="t-son" type="button" aria-pressed="false">Sonido</button>
         <button class="tg" id="t-inst" type="button" hidden>Instalar</button>
       </div>
@@ -395,7 +388,7 @@ label.k{display:block}
 
     <div class="t-bajo">
       <figure class="t-foto">
-        <img src="assets/cantero-piedra.jpg" width="662" height="1100" alt="Cantero con sombrero de copa que golpea con mazo y cincel una piedra sin labrar sobre un banco. Ferrotipo estadounidense del siglo XIX.">
+        <img src="assets/cantero-piedra.webp" width="662" height="1100" alt="Cantero con sombrero de copa que golpea con mazo y cincel una piedra sin labrar sobre un banco. Ferrotipo estadounidense del siglo XIX.">
       </figure>
       <div class="t-lema"><p>Treinta y tres temas, treinta y tres fragmentos. Cada tema que estudias retira una aspereza, hasta que queda a la vista lo que la piedra siempre llevó dentro.</p></div>
       <div class="t-avance" aria-live="polite">
@@ -430,7 +423,7 @@ label.k{display:block}
 
   <section class="mosaico" aria-label="Lo que la piedra guarda">
     <figure class="mz-a" data-rev>
-      <img src="assets/cantero-mandil.jpg" width="857" height="1100" loading="lazy" alt="Cantero con mandil blanco y sombrero de copa que levanta el mazo junto a un bloque de piedra. Ferrotipo del siglo XIX.">
+      <img src="assets/cantero-mandil.webp" width="857" height="1100" loading="lazy" alt="Cantero con mandil blanco y sombrero de copa que levanta el mazo junto a un bloque de piedra. Ferrotipo del siglo XIX.">
     </figure>
     <div class="mz-b">
       <blockquote data-rev>No se le agrega nada a la piedra: solo se le quita lo que sobra.</blockquote>
@@ -438,10 +431,10 @@ label.k{display:block}
     </div>
     <div class="mz-d">
       <p class="griego" data-rev lang="grc">Γνῶθι σεαυτόν</p>
-      <p data-rev style="--d:1">En el templo de Apolo, en Delfos, una máxima recibía a quien entraba. Esta piedra guarda la misma; aparece palabra por palabra al completar cada herramienta.</p>
+      <p data-rev style="--d:1">En el templo de Apolo, en Delfos, una máxima recibía a quien entraba. Esta piedra guarda la misma; aparece palabra por palabra al completar cada prenda de trabajo.</p>
     </div>
     <figure class="mz-c" data-rev style="--d:2">
-      <img src="assets/delfos.jpg" width="1100" height="816" loading="lazy" alt="Columnas en pie del templo de Apolo en Delfos, Grecia, sobre la ladera del monte Parnaso.">
+      <img src="assets/delfos.webp" width="1100" height="816" loading="lazy" alt="Columnas en pie del templo de Apolo en Delfos, Grecia, sobre la ladera del monte Parnaso.">
     </figure>
   </section>
 
@@ -458,11 +451,11 @@ label.k{display:block}
     <h2 class="bit-titulo" id="h-bitacora" data-rev><span class="ind">Bitácora</span>del cantero</h2>
     <div class="bit-cuerpo">
       <figure class="bit-foto" data-rev>
-        <img src="assets/cantera-detalle.jpg" width="901" height="1100" loading="lazy" alt="Fachada labrada en cantera de la Catedral de Chihuahua, con sus dos torres bajo un cielo azul.">
+        <img src="assets/cantera-detalle.webp" width="901" height="1100" loading="lazy" alt="Fachada labrada en cantera de la Catedral de Chihuahua, con sus dos torres bajo un cielo azul.">
         <figcaption>La piedra ya labrada: cantera de la Catedral de Chihuahua.</figcaption>
       </figure>
       <div class="bit-tabla">
-        <p data-rev>Los 33 temas repartidos entre las tres herramientas del Aprendiz, once por cada una. El orden de cada lista es el orden sugerido de estudio.</p>
+        <p data-rev>Los 33 temas repartidos entre las tres prendas de trabajo del Aprendiz, once por cada una. El orden de cada lista es el orden sugerido de estudio.</p>
         <div class="actions" data-rev style="--d:1">
           <button class="lnk" id="export" type="button">Descargar respaldo</button>
           <button class="lnk" id="import" type="button">Cargar respaldo</button>
@@ -471,6 +464,7 @@ label.k{display:block}
           <button class="lnk quiet" id="reset" type="button">Reiniciar la piedra</button>
           <input type="file" id="import-file" accept=".json,application/json" hidden>
         </div>
+        <p class="note respaldo-fecha" id="ultimo-respaldo" aria-live="polite"></p>
         <div class="actions" id="import-confirm" hidden>
           <span class="note" id="import-info"></span>
           <button class="btn" id="import-yes" type="button">Reemplazar con el respaldo</button>
@@ -505,7 +499,7 @@ label.k{display:block}
     <div><p class="k">Fuente</p><p>Adolfo Terrones Benítez y Alfonso León García, <i>Los 33 temas del Aprendiz Masón</i>. Las ideas centrales son síntesis para estudio y no sustituyen la lectura completa ni la instrucción en Logia.</p></div>
     <div><p class="k">Temas reservados</p><p>Los temas marcados como <span class="res-mark" style="margin:0">reservado</span> se presentan aquí solo en su sentido moral. Su contenido ritual se instruye de viva voz, dentro del Templo.</p></div>
     <div><p class="k">Tu avance</p><p>Se guarda únicamente en este dispositivo y no se envía a ningún servidor. Usa “Descargar respaldo” para conservarlo o llevarlo a otro dispositivo.</p></div>
-    <div><p class="k">Imágenes</p><p class="credits">Ferrotipos de canteros, The Metropolitan Museum of Art (<a href="https://commons.wikimedia.org/w/index.php?curid=60501365">1</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=60500201">2</a>), <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.es">CC0</a>. <a href="https://commons.wikimedia.org/w/index.php?curid=64170779">Templo de Apolo en Delfos</a>, Skyring, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a>. <a href="https://commons.wikimedia.org/w/index.php?curid=21816676">Catedral de Chihuahua</a>, Battroid, <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.es">CC BY-SA 3.0</a>. Vía Wikimedia Commons; recortadas y reducidas.</p></div>
+    <div><p class="k">Imágenes</p><p class="credits">Ferrotipos de canteros, The Metropolitan Museum of Art (<a href="https://commons.wikimedia.org/w/index.php?curid=60501365">1</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=60500201">2</a>), <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.es">CC0</a>. <a href="https://commons.wikimedia.org/w/index.php?curid=64170779">Templo de Apolo en Delfos</a>, Skyring, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a>. <a href="https://commons.wikimedia.org/w/index.php?curid=21816676">Catedral de Chihuahua</a>, Battroid, <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.es">CC BY-SA 3.0</a>. Vía Wikimedia Commons; recortadas, reducidas y viradas a sepia.</p></div>
   </div>
   <div>
     <svg class="marca" viewBox="0 0 1000 150" aria-hidden="true"><text x="0" y="120" textLength="1000" lengthAdjust="spacingAndGlyphs" font-family="'Cinzel',Georgia,serif" font-size="158" font-weight="500">Piedra bruta</text></svg>
@@ -577,7 +571,7 @@ function clipHalf(poly,a,b,c){ // conserva a*x+b*y<=c
 function inPoly(p,poly){let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])c=!c}return c}
 function centroid(poly){let A=0,x=0,y=0;for(let i=0;i<poly.length;i++){const p=poly[i],q=poly[(i+1)%poly.length];const cr=p[0]*q[1]-q[0]*p[1];A+=cr;x+=(p[0]+q[0])*cr;y+=(p[1]+q[1])*cr}A/=2;return A?[x/(6*A),y/(6*A)]:poly[0]}
 function voronoi(region,seeds){return seeds.map((s,i)=>{let poly=region.slice();seeds.forEach((q,j)=>{if(i===j||!poly.length)return;const a=q[0]-s[0],b=q[1]-s[1];poly=clipHalf(poly,a,b,(q[0]*q[0]+q[1]*q[1]-s[0]*s[0]-s[1]*s[1])/2)});return poly})}
-// tres bandas: cada herramienta descubre una parte de la frase
+// tres bandas: cada prenda (martillo, regla, mandil) descubre una parte de la frase
 const BANDS=[["martillo",0,472],["regla",472,686],["mandil",686,1000]];
 const cells=[];
 BANDS.forEach(([g,x0,x1])=>{
@@ -705,12 +699,6 @@ function cincel(){if(!sonido)return;try{ac=ac||new (window.AudioContext||window.
 }catch(e){}}
 const tSon=document.getElementById("t-son");tSon.setAttribute("aria-pressed",String(sonido));
 tSon.addEventListener("click",()=>{sonido=!sonido;tSon.setAttribute("aria-pressed",String(sonido));try{localStorage.setItem("pb-sonido",sonido?"1":"0")}catch(e){}if(sonido)cincel()});
-// Penumbra (oscuro) o página impresa (claro)
-const tLuz=document.getElementById("t-luz");
-function tema(v){if(v)document.documentElement.setAttribute("data-theme","dark");else document.documentElement.removeAttribute("data-theme");tLuz.setAttribute("aria-pressed",String(!!v));
-  document.querySelector('meta[name="theme-color"]').setAttribute("content",v?"#030305":"#06070C")}
-try{tema(localStorage.getItem("pb-penumbra")==="1")}catch(e){}
-tLuz.addEventListener("click",()=>{const v=tLuz.getAttribute("aria-pressed")!=="true";tema(v);try{localStorage.setItem("pb-penumbra",v?"1":"0")}catch(e){}});
 // menú en el teléfono
 const menuBtn=document.getElementById("menu-btn"),menuEl=document.getElementById("menu");
 function menu(o){menuBtn.setAttribute("aria-expanded",String(o));menuEl.classList.toggle("abierto",o)}
@@ -745,7 +733,7 @@ function render(){
   const rv=document.getElementById("revelada");
   if(total===33){rv.hidden=false;rv.innerHTML="<b>La piedra está descubierta.</b> No se le agregó nada: solo se le quitó lo que sobraba. Lo que siempre llevó dentro es la máxima del Templo de Delfos que el Aprendiz hace suya: <i>Conócete a ti mismo</i>.";}
   else if(parts.length){rv.hidden=false;rv.textContent=`En la piedra ya se lee ${parts.map(g=>FRASES[g]).join(" y ")}.`}
-  else if(total){rv.hidden=false;rv.textContent="Completa una herramienta para que aparezca la primera palabra."}
+  else if(total){rv.hidden=false;rv.textContent="Completa los once temas de una prenda para que aparezca la primera palabra."}
   else rv.hidden=true;
   const sig=T.find(t=>!isDone(t.n));
   $("total").textContent=total;
@@ -760,7 +748,10 @@ function render(){
 // ---------- recordatorio de respaldo
 function leerR(){try{return JSON.parse(localStorage.getItem("pb-respaldo"))||{}}catch(e){return {}}}
 function escribirR(o){try{localStorage.setItem("pb-respaldo",JSON.stringify(o))}catch(e){}}
+function mostrarUltimoRespaldo(){const r=leerR(),el=$("ultimo-respaldo");if(!el)return;
+  el.textContent=r.ts?"Último respaldo: "+new Date(r.ts).toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"})+". Tus notas viven solo en este dispositivo.":"Aún no has descargado ningún respaldo. Tus notas viven solo en este dispositivo."}
 function revisarRespaldo(total){
+  mostrarUltimoRespaldo();
   const r=leerR(),notas=Object.keys(S.notes).length,base=r.done||0,dias=r.ts?(Date.now()-r.ts)/864e5:Infinity;
   const posp=r.posp||0;
   let msg="";
@@ -877,7 +868,7 @@ const samsung=/SamsungBrowser/i.test(UA);
 const enApp=/FBAN|FBAV|Instagram|WhatsApp|Line\//i.test(UA);
 function pasos(){
   if(enApp)return "Estás dentro de otra app. Abre este enlace en tu navegador (menú ⋮ → “Abrir en el navegador”) y desde ahí instálala.";
-  if(ios)return "En Safari toca el botón Compartir y luego “Agregar a inicio”. Quedará como app y funcionará sin internet.";
+  if(ios)return "En Safari toca el botón Compartir y luego “Agregar a inicio”. Quedará como app, funcionará sin internet y Safari ya no borrará tus notas por pasar días sin abrirla.";
   if(samsung)return "En Samsung Internet toca el menú de tres rayas (abajo a la derecha), luego “Agregar página a” y elige “Pantalla de inicio”. Si ves un ícono de descarga en la barra de direcciones, también puedes tocarlo.";
   if(android)return "En Chrome toca el menú ⋮ (arriba a la derecha) y elige “Instalar app” o “Agregar a la pantalla principal”, luego “Instalar”.";
   return "En Chrome o Edge para computadora, usa el ícono de instalar en la barra de direcciones o el menú ⋮ → “Instalar”.";
@@ -925,11 +916,16 @@ else revs.forEach(r=>r.classList.add("visto"));
 })();
 </script>
 <script>
-// Bóveda estrellada que gira despacio y rayos del Delta. Decoración pura, sin tocar la lógica de la app.
-(function(){const q=matchMedia("(prefers-reduced-motion: reduce)").matches;const cv=document.getElementById("cielo"),c=cv.getContext("2d");let W,H,E=[],a=0;
-function m(){const d=Math.min(2,devicePixelRatio||1);W=cv.width=innerWidth*d;H=cv.height=innerHeight*d;E=Array.from({length:Math.round(W*H/6000)},()=>({r:Math.random()*Math.hypot(W,H)*.75,a:Math.random()*6.283,s:(Math.random()*1.2+.2)*d,b:Math.random()*.6+.25,t:Math.random()*6}))}
-function f(){c.clearRect(0,0,W,H);const px=W*.5,py=-H*.05;for(const e of E){const x=px+Math.cos(e.a+a)*e.r,y=py+Math.sin(e.a+a)*e.r;if(x<0||x>W||y<0||y>H)continue;c.fillStyle="rgba(244,221,166,"+(e.b*(.7+.3*Math.sin(e.t+a*500)))+")";c.beginPath();c.arc(x,y,e.s,0,6.283);c.fill()}if(!q&&!document.hidden){a+=.00008}requestAnimationFrame(f)}
-m();f();addEventListener("resize",m);
+// Bóveda estrellada que gira despacio. Se dibuja una sola vez si se pidió menos movimiento,
+// se pausa con la ficha abierta o la pestaña oculta, y se limita a unas 20 actualizaciones por segundo.
+(function(){const q=matchMedia("(prefers-reduced-motion: reduce)").matches;const cv=document.getElementById("cielo"),c=cv.getContext("2d");let W,H,E=[],a=0,ult=0,pend=0;
+const ficha=document.getElementById("ficha");
+function m(){const d=Math.min(2,devicePixelRatio||1);W=cv.width=innerWidth*d;H=cv.height=innerHeight*d;E=Array.from({length:Math.round(W*H/6000)},()=>({r:Math.random()*Math.hypot(W,H)*.75,a:Math.random()*6.283,s:(Math.random()*1.2+.2)*d,b:Math.random()*.6+.25,t:Math.random()*6}));dibujar()}
+function dibujar(){c.clearRect(0,0,W,H);const px=W*.5,py=-H*.05;for(const e of E){const x=px+Math.cos(e.a+a)*e.r,y=py+Math.sin(e.a+a)*e.r;if(x<0||x>W||y<0||y>H)continue;c.fillStyle="rgba(244,221,166,"+(e.b*(.7+.3*Math.sin(e.t+a*500)))+")";c.beginPath();c.arc(x,y,e.s,0,6.283);c.fill()}}
+function paso(t){pend=0;if(document.hidden||ficha.open)return;if(t-ult>=50){a+=.00024;dibujar();ult=t}pend=requestAnimationFrame(paso)}
+function seguir(){if(!q&&!pend&&!document.hidden&&!ficha.open)pend=requestAnimationFrame(paso)}
+m();addEventListener("resize",m);
+if(!q){seguir();document.addEventListener("visibilitychange",seguir);ficha.addEventListener("close",seguir)}
 const g=document.getElementById("rayos");if(g)for(let i=0;i<32;i++){const t=i/32*6.283,l=i%2?78:96,L=document.createElementNS("http://www.w3.org/2000/svg","line");L.setAttribute("x1",100+Math.cos(t)*62);L.setAttribute("y1",108+Math.sin(t)*62);L.setAttribute("x2",100+Math.cos(t)*l);L.setAttribute("y2",108+Math.sin(t)*l);g.appendChild(L)}})();
 </script>
 </body>

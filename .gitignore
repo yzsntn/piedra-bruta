@@ -2,7 +2,8 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-Icon?
+# Archivo oculto «Icon\r» de macOS (no confundir con la carpeta icons/)
+Icon[\r]
 ._*
 
 # Archivos que macOS crea en discos y carpetas compartidas
