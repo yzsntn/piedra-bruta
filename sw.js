@@ -1,10 +1,10 @@
 // La Piedra Bruta del Aprendiz · trabajo sin conexión
 // Al publicar cambios, sube este número (v2.2, v2.3...) para que las apps instaladas se actualicen.
-const VERSION = "piedra-bruta-v5.2";
+const VERSION = "piedra-bruta-v6.0";
 const APP = [
   "./", "index.html", "temas.js", "manifest.webmanifest",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png",
-  "fonts/bodoni-moda-500.woff2", "fonts/bodoni-moda-500-italic.woff2", "fonts/jost.woff2",
+  "fonts/cinzel.woff2", "fonts/cormorant-garamond.woff2", "fonts/cormorant-garamond-italic.woff2",
   "assets/cantero-piedra.jpg", "assets/cantero-mandil.jpg", "assets/delfos.jpg", "assets/cantera-detalle.jpg"
 ];
 
